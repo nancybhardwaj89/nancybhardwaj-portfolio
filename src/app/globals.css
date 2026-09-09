@@ -111,6 +111,32 @@ html {
 }
 
 /* ---------------------------------------------------------------------------
+   Hero backdrop: a faint blueprint grid that fades out toward the bottom, so
+   the section below it starts on clean ground. Purely decorative.
+   --------------------------------------------------------------------------- */
+.hero-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(
+      to right,
+      var(--border) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(
+    120% 80% at 50% 0%,
+    #000 30%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(120% 80% at 50% 0%, #000 30%, transparent 78%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
    Scroll-in motion. Sections start slightly offset and settle once visible.
    --------------------------------------------------------------------------- */
 .reveal {

@@ -51,6 +51,22 @@ export const site = {
 
   /** Set to a path under /public once a CV PDF is added, or null to hide. */
   resumeHref: null as string | null,
+
+  /**
+   * Portrait, as a path under /public — e.g. "/nancy.jpg".
+   * While null, the hero renders an initials monogram instead, which is a
+   * deliberate design rather than a broken image.
+   */
+  avatar: null as string | null,
+
+  /** Fallback for the avatar slot. */
+  initials: "NB",
+
+  /** Availability badge on the portrait. Set to null to hide it entirely. */
+  availability: "Open to work" as string | null,
+
+  /** Short credentials strip above the headline. */
+  eyebrow: ["AI Quality Engineering Lead", "14+ years", "India"],
 } as const;
 
 /** Home-page sections, in scroll order. Drives the nav and the scroll-spy. */

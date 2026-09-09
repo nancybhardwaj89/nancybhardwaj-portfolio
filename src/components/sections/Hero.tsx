@@ -1,54 +1,135 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { LinkedInIcon } from "@/components/ui/Icon";
 import { site, stats } from "@/content/site";
 
-/**
- * The 30-second scan. Positioning first, proof immediately underneath.
- *
- * No rotating text or typewriter effect: on the mobile-first read this site is
- * designed for, motion in the headline costs legibility and buys nothing.
- */
+/** Shared pill-button shape, so the CTA row stays consistent. */
+const pill =
+  "inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-medium transition-colors";
+const pillOutline = `${pill} border border-border bg-surface text-fg hover:border-border-strong hover:bg-surface-raised`;
+
 export function Hero() {
+  const linkedin = site.socials.find((s) => s.icon === "linkedin");
+
   return (
-    <section id="top" className="pt-16 pb-20 sm:pt-24 sm:pb-28">
+    <section id="top" className="hero-grid relative pt-14 pb-20 sm:pt-20 sm:pb-28">
       <Container>
-        <Reveal>
-          <p className="font-mono text-xs tracking-wide text-accent">
-            {site.location}
-          </p>
+        <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
+          {/* Text column */}
+          <Reveal>
+            {/* Credentials strip */}
+            <p className="inline-flex items-center gap-2.5 rounded-full border border-border bg-surface px-4 py-2 font-mono text-xs text-fg-muted">
+              <span
+                aria-hidden="true"
+                className="h-1.5 w-1.5 rounded-full bg-accent"
+              />
+              {site.eyebrow.join(" · ")}
+            </p>
 
-          <h1 className="mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.1] tracking-tight text-fg sm:text-5xl lg:text-6xl">
-            Quality engineering for{" "}
-            <span className="text-accent">AI systems</span>.
-          </h1>
+            <h1 className="mt-7 font-display text-5xl font-bold leading-[0.95] tracking-tight text-fg sm:text-6xl lg:text-7xl">
+              {site.name}
+            </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fg-muted">
-            {site.tagline}
-          </p>
+            <p className="mt-5 font-display text-2xl font-semibold tracking-tight text-accent sm:text-3xl">
+              {site.role}
+            </p>
 
-          <p className="mt-4 font-mono text-sm text-fg-faint">
-            {site.roleLong}
-          </p>
+            <p className="mt-2.5 font-mono text-base text-fg-muted sm:text-lg">
+              Test Automation Architect · Agentic AI QA
+            </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a
-              href="#projects"
-              className="inline-flex items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg transition-colors hover:bg-accent-hover"
-            >
-              View projects
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-border-strong hover:bg-surface-raised"
-            >
-              Get in touch
-            </a>
-          </div>
-        </Reveal>
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-fg-muted">
+              I test the systems that don&apos;t give the same answer twice —
+              pairing fourteen years of{" "}
+              <span className="font-mono text-sm text-fg">Playwright</span>,{" "}
+              <span className="font-mono text-sm text-fg">Selenium</span> and
+              CI/CD automation with{" "}
+              <span className="font-medium text-fg">AI quality engineering</span>
+              : <span className="font-mono text-sm text-fg">RAG</span> and{" "}
+              <span className="font-mono text-sm text-fg">LLM evaluation</span>,
+              agent behaviour validation, and Salesforce{" "}
+              <span className="font-mono text-sm text-fg">Agentforce</span>{" "}
+              testing.
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-2.5">
+              <a
+                href="#projects"
+                className={`${pill} bg-accent text-accent-fg hover:bg-accent-hover`}
+              >
+                View projects
+              </a>
+
+              {linkedin ? (
+                <a
+                  href={linkedin.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={pillOutline}
+                >
+                  <span className="h-3.5 w-3.5">
+                    <LinkedInIcon />
+                  </span>
+                  LinkedIn
+                </a>
+              ) : null}
+
+              <a href={`mailto:${site.email}`} className={pillOutline}>
+                Email me
+              </a>
+
+              {site.resumeHref ? (
+                <a href={site.resumeHref} className={pillOutline}>
+                  Résumé
+                </a>
+              ) : null}
+            </div>
+          </Reveal>
+
+          {/* Portrait column */}
+          <Reveal delay={120}>
+            <div className="relative mx-auto w-fit lg:mx-0 lg:ml-auto">
+              <div className="rounded-full p-[3px] ring-2 ring-accent">
+                <div className="relative h-56 w-56 overflow-hidden rounded-full bg-surface-raised sm:h-72 sm:w-72">
+                  {site.avatar ? (
+                    <Image
+                      src={site.avatar}
+                      alt={`${site.name}, ${site.role}`}
+                      fill
+                      sizes="(min-width: 640px) 18rem, 14rem"
+                      className="object-cover"
+                      priority
+                    />
+                  ) : (
+                    // Monogram fallback — reads as intentional, not as a
+                    // failed image, until a portrait is supplied.
+                    <span
+                      aria-hidden="true"
+                      className="flex h-full w-full items-center justify-center font-display text-6xl font-semibold tracking-tight text-fg-faint"
+                    >
+                      {site.initials}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {site.availability ? (
+                <p className="absolute -bottom-1 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 font-mono text-xs text-fg-muted shadow-sm">
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 rounded-full bg-accent"
+                  />
+                  {site.availability}
+                </p>
+              ) : null}
+            </div>
+          </Reveal>
+        </div>
 
         {/* Stats band — every figure traceable to a CV claim. */}
-        <Reveal delay={120}>
-          <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+        <Reveal delay={180}>
+          <dl className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
             {stats.map((stat) => (
               // column-reverse so the value reads first visually while the
               // markup keeps its natural dt-then-dd order for assistive tech.

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { projects } from "@/content/projects";
+import { moreRepos, projects } from "@/content/projects";
+import { site } from "@/content/site";
 
 export function Projects() {
   return (
@@ -65,6 +66,69 @@ export function Projects() {
           </Reveal>
         ))}
       </div>
+
+      {/* Secondary repositories — one row, not a second grid, so the featured
+          four keep their weight. */}
+      <Reveal delay={80}>
+        <div className="mt-10 border-t border-border pt-8">
+          <h3 className="font-mono text-xs tracking-wide text-fg-faint">
+            ALSO ON GITHUB
+          </h3>
+
+          <ul className="mt-4 space-y-3">
+            {moreRepos.map((repo) => (
+              <li key={repo.href}>
+                <a
+                  href={repo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col gap-2 rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-accent-border sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+                >
+                  <div className="min-w-0">
+                    <p className="font-display text-base font-semibold tracking-tight text-fg transition-colors group-hover:text-accent">
+                      {repo.name}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-fg-muted">
+                      {repo.description}
+                    </p>
+                  </div>
+                  <ul className="flex shrink-0 flex-wrap gap-1.5">
+                    {repo.stack.map((tech) => (
+                      <li
+                        key={tech}
+                        className="rounded-md border border-border bg-surface-raised px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={site.socials.find((s) => s.icon === "github")?.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-accent transition-colors hover:text-accent-hover"
+          >
+            All repositories
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="h-3 w-3"
+            >
+              <path d="M5.5 10.5 10.5 5.5M6 5.5h4.5V10" />
+            </svg>
+          </a>
+        </div>
+      </Reveal>
     </Section>
   );
 }

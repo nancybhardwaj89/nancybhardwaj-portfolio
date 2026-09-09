@@ -66,6 +66,8 @@ export function Header() {
   // Anchors must be absolute when we're on a project detail page.
   const hrefFor = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
+  const githubHref = site.socials.find((s) => s.icon === "github")?.href;
+
   return (
     <header
       className={cn(
@@ -77,9 +79,26 @@ export function Header() {
         <div className="flex h-16 items-center justify-between gap-4">
           <Link
             href="/"
-            className="font-mono text-sm font-medium tracking-tight text-fg transition-colors hover:text-accent"
+            className="group inline-flex items-center gap-2.5 text-fg"
+            aria-label={`${site.name} — home`}
           >
-            {site.name}
+            <span className="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border bg-surface-raised font-display text-xs font-semibold text-fg-muted">
+              {site.avatar ? (
+                // eslint-disable-next-line @next/next/no-img-element -- fixed
+                // 32px chrome element; next/image adds no value at this size.
+                <img
+                  src={site.avatar}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                site.initials
+              )}
+            </span>
+            <span className="font-display text-sm font-semibold tracking-tight transition-colors group-hover:text-accent">
+              Nancy
+              <span className="text-accent">.QA</span>
+            </span>
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
@@ -103,6 +122,28 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {githubHref ? (
+              <a
+                href={githubHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden items-center gap-1.5 rounded-full border border-border bg-surface px-4 py-2 text-sm text-fg transition-colors hover:border-border-strong hover:bg-surface-raised sm:inline-flex"
+              >
+                GitHub
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="h-3 w-3"
+                >
+                  <path d="M5.5 10.5 10.5 5.5M6 5.5h4.5V10" />
+                </svg>
+              </a>
+            ) : null}
             <ThemeToggle />
             <button
               type="button"

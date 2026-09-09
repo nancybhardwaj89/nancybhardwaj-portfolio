@@ -209,3 +209,19 @@ export const projects: Project[] = [
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
+
+/**
+ * Secondary repositories worth surfacing without a full write-up.
+ *
+ * Deliberately short — this strip exists to show range, and every entry added
+ * here dilutes the four featured projects above it.
+ */
+export const moreRepos = [
+  {
+    name: "AI Agent — IT Support Triage",
+    description:
+      "Human-in-the-loop multi-agent workflow for IT ticket triage, built in n8n.",
+    href: "https://github.com/nancybhardwaj89/AIAgent-IT-Support-Triage-multi-agent-n8n",
+    stack: ["n8n", "Multi-Agent", "Human-in-the-Loop"],
+  },
+];
