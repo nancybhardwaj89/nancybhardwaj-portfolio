@@ -50,15 +50,17 @@ export function Hero() {
         <Reveal delay={120}>
           <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-surface px-5 py-6">
-                <dt className="sr-only">{stat.label}</dt>
-                <dd>
-                  <span className="block font-display text-3xl font-semibold tracking-tight text-fg">
-                    {stat.value}
-                  </span>
-                  <span className="mt-1.5 block text-sm leading-snug text-fg-muted">
-                    {stat.label}
-                  </span>
+              // column-reverse so the value reads first visually while the
+              // markup keeps its natural dt-then-dd order for assistive tech.
+              <div
+                key={stat.label}
+                className="flex flex-col-reverse bg-surface px-5 py-6"
+              >
+                <dt className="mt-1.5 text-sm leading-snug text-fg-muted">
+                  {stat.label}
+                </dt>
+                <dd className="font-display text-3xl font-semibold tracking-tight text-fg">
+                  {stat.value}
                 </dd>
               </div>
             ))}
