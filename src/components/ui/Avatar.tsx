@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 /**
@@ -30,6 +30,18 @@ export function Avatar({
   textClassName?: string;
 }) {
   const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // The onError prop alone isn't enough. This markup is server-rendered, so a
+  // missing image finishes failing before React hydrates and attaches the
+  // handler — the event fires into the void and the broken alt text stays on
+  // screen. Re-check the element's actual state once on mount: a complete
+  // image with zero natural width is one that failed to decode.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
+
   const showImage = src !== null && !failed;
 
   return (
@@ -42,13 +54,18 @@ export function Avatar({
       {showImage ? (
         // eslint-disable-next-line @next/next/no-img-element -- see note above
         <img
+          ref={imgRef}
           src={src}
           alt={alt}
           width={size}
           height={size}
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-full w-full object-cover"
+          // text-transparent so that in the window before the mount check
+          // runs, a failed image shows nothing rather than alt text sprawling
+          // across the layout. The alt attribute stays intact for assistive
+          // tech and for users browsing with images disabled.
+          className="h-full w-full object-cover text-transparent"
         />
       ) : (
         <span
