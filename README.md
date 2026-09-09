@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nancy Bhardwaj — Portfolio
 
-## Getting Started
+Personal portfolio site. Next.js App Router, Tailwind v4, statically exported
+and hosted on Vercel.
 
-First, run the development server:
+## Running locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static export to ./out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How it's put together
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All copy lives in `src/content/` as typed data, not inside components. To
+change what the site says, edit these — nothing in `src/components/` should
+need touching:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File | Contents |
+| --- | --- |
+| `content/site.ts` | Name, role, tagline, email, socials, portrait path, stats band |
+| `content/projects.ts` | The four featured projects and their detail pages, plus secondary repos |
+| `content/skills.ts` | Skill groups shown in the Skills section |
+| `content/experience.ts` | Employment history |
+| `content/credentials.ts` | Certifications, awards, education, community |
 
-## Learn More
+Project detail pages at `/projects/<slug>` are generated from `projects.ts` via
+`generateStaticParams()`, so adding a project to that array creates its page
+automatically.
 
-To learn more about Next.js, take a look at the following resources:
+### Design system
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Colours and fonts are CSS custom properties in `src/app/globals.css`, exposed
+to Tailwind through `@theme inline`. Changing the accent colour is a one-line
+edit to `--accent` (and its dark-mode counterpart) — no find-and-replace.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Dark mode is class-based (`.dark` on `<html>`), set before first paint by a
+blocking inline script in `src/lib/theme-script.ts` so there's no theme flash
+on load.
 
-## Deploy on Vercel
+### Portrait
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Drop an image at `public/nancy.jpg` and it appears in the hero and header. If
+the file is missing or fails to load, `components/ui/Avatar.tsx` falls back to
+an initials monogram rather than a broken image.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Pushing to `main` triggers a production deploy on Vercel. Any other branch gets
+its own preview URL, so changes can be reviewed before going live.
+
+The site is a static export (`output: "export"` in `next.config.ts`) — there's
+no server runtime, and no `vercel.json` is needed. Vercel detects Next.js and
+configures the build itself.
+
+After the first deploy, update `site.url` in `content/site.ts` to the real
+domain so canonical URLs, the sitemap and Open Graph tags are correct.
