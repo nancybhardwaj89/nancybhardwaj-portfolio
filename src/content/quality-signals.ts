@@ -27,14 +27,14 @@ export const qualitySignals: QualitySignal[] = [
   },
   {
     dimension: "Reliability",
-    tests: ["Regression behaviour", "Consistency", "Failure recovery"],
+    tests: ["Regression behavior", "Consistency", "Failure recovery"],
   },
   {
     dimension: "Safety",
     tests: ["Prompt injection", "Data leakage", "Unsafe tool use"],
   },
   {
-    dimension: "Agent behaviour",
+    dimension: "Agent behavior",
     tests: ["Planning", "Tool selection", "Handoffs", "Loops", "Escalation"],
   },
   {

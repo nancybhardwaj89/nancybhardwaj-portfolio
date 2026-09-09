@@ -33,14 +33,14 @@ export function About() {
             </p>
             <p>
               That&apos;s where most of my recent work sits: RAG evaluation with
-              RAGAS and DeepEval, agent behaviour validation, AI red teaming,
+              RAGAS and DeepEval, agent behavior validation, AI red teaming,
               and Salesforce Agentforce testing — plus building the tooling to
               do it, because much of it doesn&apos;t exist off the shelf yet.
               The Playwright and API automation underneath hasn&apos;t gone
               anywhere; it&apos;s the foundation the rest is built on.
             </p>
             <p>
-              Outside delivery, I speak at organisation-wide sessions, write
+              Outside delivery, I speak at organization-wide sessions, write
               about automation and Playwright, and mentor junior engineers.
             </p>
           </div>

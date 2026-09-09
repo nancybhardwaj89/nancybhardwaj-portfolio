@@ -20,8 +20,13 @@ export const site = {
   /** Full positioning line, used in the hero. */
   roleLong: "AI Quality Engineering Lead · Test Automation Architect",
 
+  /** The hook, shown at display size in the hero. */
   tagline:
-    "14+ years in quality engineering, now building and testing the AI agents, RAG pipelines and LLM systems that ship to production.",
+    "I test what happens when software starts thinking, deciding, and acting.",
+
+  /** The supporting paragraph, and the meta description for search results. */
+  intro:
+    "I build quality systems for AI-powered software. With 14+ years of experience in Playwright, Selenium, CI/CD, and test automation, I specialize in LLM and RAG evaluation, agent behavior validation, security testing, observability, and Salesforce Agentforce quality engineering.",
 
   location: "Noida, India",
 
@@ -49,8 +54,8 @@ export const site = {
     },
   ] as SocialLink[],
 
-  /** Set to a path under /public once a CV PDF is added, or null to hide. */
-  resumeHref: null as string | null,
+  /** Path under /public. Set to null to hide the download button. */
+  resumeHref: "/Nancy-Bhardwaj-CV.pdf" as string | null,
 
   /**
    * Portrait, as a path under /public.

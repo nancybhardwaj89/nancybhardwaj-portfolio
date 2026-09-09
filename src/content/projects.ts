@@ -22,7 +22,7 @@ export interface Project {
   /** One-sentence hook for the home-page card. */
   summary: string;
   status?: string;
-  /** Shown on the card; the 4–5 most recognisable. */
+  /** Shown on the card; the 4–5 most recognizable. */
   primaryStack: string[];
   /** Full technology list for the detail page sidebar. */
   stack: string[];
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     ],
     result: null,
     learned:
-      "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimisation, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
+      "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimization, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
     links: [
       {
         label: "Source on GitHub",
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     name: "SprintReadyAI",
     subtitle: "QA refinement copilot",
     summary:
-      "An n8n agent that reads a JIRA story, analyses it from a QA perspective, and posts a readiness assessment to Slack for human review before anything reaches the ticket.",
+      "An n8n agent that reads a JIRA story, analyzes it from a QA perspective, and posts a readiness assessment to Slack for human review before anything reaches the ticket.",
     primaryStack: ["n8n", "OpenAI", "JIRA", "Slack", "Promptfoo"],
     stack: [
       "n8n",
@@ -100,11 +100,11 @@ export const projects: Project[] = [
       "Human-in-the-Loop design",
     ],
     problem:
-      "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no consideration of regression impact. The team's time goes into discovering that a story is underspecified rather than into the judgement calls only people can make.",
+      "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no consideration of regression impact. The team's time goes into discovering that a story is underspecified rather than into the judgment calls only people can make.",
     testStrategy:
-      "The failure mode for this agent isn't a crash, it's confident output on a story with nothing in it. A story that says three words should produce an assessment saying so, not a plausible-looking set of invented test scenarios. So the test suite is organised by input quality rather than by feature: well-defined, vague, invalid and missing stories each get their own expectations.",
+      "The failure mode for this agent isn't a crash, it's confident output on a story with nothing in it. A story that says three words should produce an assessment saying so, not a plausible-looking set of invented test scenarios. So the test suite is organized by input quality rather than by feature: well-defined, vague, invalid and missing stories each get their own expectations.",
     approach:
-      "An n8n workflow pulls story detail from JIRA and analyses it from a QA angle, emitting structured output: a readiness score, the acceptance criteria that are absent, clarification questions worth asking, candidate test scenarios, likely regression impact and a QA estimate. Reports land in Slack for a QA engineer to review, and only reach JIRA as a comment once a person has approved them. The agent drafts; it does not decide.",
+      "An n8n workflow pulls story detail from JIRA and analyzes it from a QA angle, emitting structured output: a readiness score, the acceptance criteria that are absent, clarification questions worth asking, candidate test scenarios, likely regression impact and a QA estimate. Reports land in Slack for a QA engineer to review, and only reach JIRA as a comment once a person has approved them. The agent drafts; it does not decide.",
     evaluation: [
       "Promptfoo evaluation across four input classes: well-defined, vague, invalid and missing stories",
       "Response reliability and consistency — the failure mode being confident output on an empty story",
@@ -166,11 +166,11 @@ export const projects: Project[] = [
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     problem:
-      "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply having called the wrong tool, passed parameters it should never have had access to, or taken an execution path that violates policy. The response looks correct; the behaviour underneath it was not.",
+      "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply having called the wrong tool, passed parameters it should never have had access to, or taken an execution path that violates policy. The response looks correct; the behavior underneath it was not.",
     testStrategy:
       "Assert on the execution trace rather than the output, using an expected-vs-actual model: which tools were selected, what parameters they received, the path taken through them, and whether that path complied with policy. Alongside the functional expectations sit adversarial scenarios, because an agent with tool access has an attack surface, not just a correctness surface.",
     approach:
-      "A behaviour validation framework covering tool selection, parameters, execution paths, policy compliance and risk, with security scenarios for prompt injection, unauthorised data access, privilege escalation and high-impact actions — an unauthorised refund being the concrete case. A policy-driven risk and findings model classifies observed behaviour, flags security and business-rule violations, and produces actionable recommendations rather than a bare pass/fail, so the output is readable by someone deciding whether an agent is safe to ship.",
+      "A behavior validation framework covering tool selection, parameters, execution paths, policy compliance and risk, with security scenarios for prompt injection, unauthorized data access, privilege escalation and high-impact actions — an unauthorized refund being the concrete case. A policy-driven risk and findings model classifies observed behavior, flags security and business-rule violations, and produces actionable recommendations rather than a bare pass/fail, so the output is readable by someone deciding whether an agent is safe to ship.",
     evaluation: [
       "Assertions on execution traces — tool selection, parameters and execution path",
       "Policy compliance and risk classification per scenario",

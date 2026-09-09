@@ -39,7 +39,7 @@ export function ThemeToggle() {
       aria-label={
         mounted
           ? `Switch to ${isDark ? "light" : "dark"} theme`
-          : "Switch colour theme"
+          : "Switch color theme"
       }
       aria-pressed={mounted ? isDark : undefined}
       className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-surface text-fg-muted transition-colors hover:border-border-strong hover:text-fg"

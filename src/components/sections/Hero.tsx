@@ -35,22 +35,16 @@ export function Hero() {
               {site.role}
             </p>
 
-            <p className="mt-2.5 font-mono text-base text-fg-muted sm:text-lg">
+            <p className="mt-4 max-w-xl font-display text-xl leading-snug tracking-tight text-fg sm:text-2xl">
+              {site.tagline}
+            </p>
+
+            <p className="mt-3 font-mono text-sm text-fg-muted sm:text-base">
               Test Automation Architect · Agentic AI QA
             </p>
 
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-fg-muted">
-              I test the systems that don&apos;t give the same answer twice —
-              pairing fourteen years of{" "}
-              <span className="font-mono text-sm text-fg">Playwright</span>,{" "}
-              <span className="font-mono text-sm text-fg">Selenium</span> and
-              CI/CD automation with{" "}
-              <span className="font-medium text-fg">AI quality engineering</span>
-              : <span className="font-mono text-sm text-fg">RAG</span> and{" "}
-              <span className="font-mono text-sm text-fg">LLM evaluation</span>,
-              agent behaviour validation, and Salesforce{" "}
-              <span className="font-mono text-sm text-fg">Agentforce</span>{" "}
-              testing.
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-fg-muted">
+              {site.intro}
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-2.5">
@@ -80,8 +74,8 @@ export function Hero() {
               </a>
 
               {site.resumeHref ? (
-                <a href={site.resumeHref} className={pillOutline}>
-                  Résumé
+                <a href={site.resumeHref} download className={pillOutline}>
+                  Download résumé
                 </a>
               ) : null}
             </div>
