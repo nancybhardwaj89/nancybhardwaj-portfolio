@@ -100,7 +100,9 @@ export function Hero() {
   const linkedin = site.socials.find((s) => s.icon === "linkedin");
 
   return (
-    <section id="top" className="hero-grid relative pt-14 pb-20 sm:pt-20 sm:pb-28">
+    // Bottom padding is deliberately small: the following <Section> supplies
+    // its own generous top padding, and doubling them left a ~220px void.
+    <section id="top" className="hero-grid relative pt-14 pb-4 sm:pt-20 sm:pb-6">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
           {/* Text column */}
@@ -176,7 +178,7 @@ export function Hero() {
 
         {/* Stats band — every figure traceable to a CV claim. */}
         <Reveal delay={180}>
-          <dl className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+          <dl className="mt-14 grid grid-cols-2 gap-px sm:mt-16 overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
             {stats.map((stat) => (
               // column-reverse so the value reads first visually while the
               // markup keeps its natural dt-then-dd order for assistive tech.
