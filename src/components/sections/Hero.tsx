@@ -187,7 +187,10 @@ export function Hero() {
               // markup keeps its natural dt-then-dd order for assistive tech.
               <div
                 key={stat.label}
-                className="flex basis-1/2 flex-col-reverse items-center px-2 text-center sm:basis-1/3 lg:basis-1/5"
+                // justify-end: on a column-reverse axis that packs content to
+                // the visual top, so every numeral aligns regardless of
+                // whether its label wraps to one line or two.
+                className="flex basis-1/2 flex-col-reverse items-center justify-end px-3 text-center sm:basis-1/3 lg:basis-1/5"
               >
                 <dt className="mt-2 text-sm leading-snug text-fg-muted">
                   {stat.label}

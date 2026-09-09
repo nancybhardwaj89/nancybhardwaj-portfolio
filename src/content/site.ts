@@ -92,10 +92,15 @@ export const navItems = [
  * Each one is traceable to a specific CV claim — no rounding up, no derived
  * figures. If a number can't be sourced, it doesn't belong here.
  */
+/**
+ * Labels are kept short deliberately — five of these sit in one row, and a
+ * label that wraps to two lines unbalances the whole band. The fuller context
+ * for each figure lives in the Experience section.
+ */
 export const stats = [
-  { value: "14+", label: "Years in quality engineering" },
-  { value: "70%", label: "Regression execution time cut" },
-  { value: "15", label: "Engineers led across time zones" },
+  { value: "14+", label: "Years in QA" },
+  { value: "70%", label: "Regression time cut" },
+  { value: "15", label: "Engineers led" },
   { value: "6+", label: "AI agents built" },
   { value: "∞", label: "Tests automated" },
 ] as const;
