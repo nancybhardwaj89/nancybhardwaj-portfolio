@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
+/* Dark mode is driven by a `.dark` class on <html>, set before first paint by
+   the inline script in layout.tsx. This overrides Tailwind's default
+   prefers-color-scheme strategy so the manual toggle can win. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens — light theme.
+
+   Every colour in the site resolves back to one of these. Changing the accent
+   is a one-line edit here, not a find-and-replace across components.
+   --------------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #fcfcfd;
+  --surface: #ffffff;
+  --surface-raised: #f7f7f8;
+  --border: #e5e5e8;
+  --border-strong: #d3d3d8;
+
+  /* Text */
+  --fg: #17171a;
+  --fg-muted: #56565f;
+  --fg-faint: #82828c;
+
+  /* Accent — single hue, used sparingly for links, focus and emphasis. */
+  --accent: #0f766e;
+  --accent-hover: #115e56;
+  --accent-fg: #ffffff;
+  --accent-subtle: #eefaf7;
+  --accent-border: #b6e3da;
 }
 
+.dark {
+  color-scheme: dark;
+
+  --bg: #0a0a0b;
+  --surface: #131316;
+  --surface-raised: #1a1a1f;
+  --border: #26262c;
+  --border-strong: #3a3a42;
+
+  --fg: #f4f4f5;
+  --fg-muted: #a5a5b0;
+  --fg-faint: #78787f;
+
+  --accent: #2dd4bf;
+  --accent-hover: #5eead4;
+  --accent-fg: #05201d;
+  --accent-subtle: #10312d;
+  --accent-border: #1d5951;
+}
+
+/* Expose the tokens to Tailwind so `bg-surface`, `text-fg-muted`,
+   `border-border`, `text-accent` etc. all work as normal utilities. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-border: var(--accent-border);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Avoid a jarring flash when the toggle flips themes. */
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* A single, consistent focus ring everywhere — keyboard users should never
+   lose their place. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Offset in-page anchor jumps so the sticky header doesn't cover the heading. */
+:target {
+  scroll-margin-top: 6rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll-in motion. Sections start slightly offset and settle once visible.
+   --------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
