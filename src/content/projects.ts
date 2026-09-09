@@ -80,7 +80,12 @@ export const projects: Project[] = [
       "Citation accuracy — whether the sources shown actually support the answer",
     ],
     outcome: null,
-    links: [],
+    links: [
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/nancybhardwaj89/QAVentra-Where-QA-Knowledge-Lives",
+      },
+    ],
   },
   {
     slug: "sprintreadyai",
@@ -114,7 +119,12 @@ export const projects: Project[] = [
       "Checked for response reliability and consistency — the failure mode being confident output on a story with nothing in it",
     ],
     outcome: null,
-    links: [],
+    links: [
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/nancybhardwaj89/SprintReadyAI-QARefinementCopilot",
+      },
+    ],
   },
   {
     slug: "testcase-compass",
@@ -150,7 +160,12 @@ export const projects: Project[] = [
       "RAGAS across five metrics: Faithfulness, Answer Relevancy, Context Precision, Context Recall and Answer Correctness",
     ],
     outcome: null,
-    links: [],
+    links: [
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/nancybhardwaj89/TestCaseCompass-AdvancedRAGAssistant",
+      },
+    ],
   },
   {
     slug: "assertpilot",
@@ -182,7 +197,12 @@ export const projects: Project[] = [
       "Policy compliance and risk classification per scenario",
     ],
     outcome: null,
-    links: [],
+    links: [
+      {
+        label: "Source on GitHub",
+        href: "https://github.com/nancybhardwaj89/AssertPilot-MCP-Agent-QA-Security-Observatory",
+      },
+    ],
   },
 ];
 

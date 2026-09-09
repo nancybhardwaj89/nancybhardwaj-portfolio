@@ -37,10 +37,16 @@ export const site = {
   phone: null as string | null,
 
   socials: [
-    // TODO: real profile URLs — the CV links them but the PDF only exposes
-    // the anchor text, not the href.
-    { label: "GitHub", href: "«github url»", icon: "github" },
-    { label: "LinkedIn", href: "«linkedin url»", icon: "linkedin" },
+    {
+      label: "GitHub",
+      href: "https://github.com/nancybhardwaj89",
+      icon: "github",
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/nancy-bhardwaj/",
+      icon: "linkedin",
+    },
   ] as SocialLink[],
 
   /** Set to a path under /public once a CV PDF is added, or null to hide. */
