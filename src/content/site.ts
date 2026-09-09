@@ -53,11 +53,13 @@ export const site = {
   resumeHref: null as string | null,
 
   /**
-   * Portrait, as a path under /public — e.g. "/nancy.jpg".
-   * While null, the hero renders an initials monogram instead, which is a
-   * deliberate design rather than a broken image.
+   * Portrait, as a path under /public.
+   *
+   * Safe to point at a file that doesn't exist yet: components/ui/Avatar.tsx
+   * falls back to an initials monogram if the image fails to load, so a
+   * missing file degrades to a designed state rather than a broken icon.
    */
-  avatar: null as string | null,
+  avatar: "/nancy.jpg" as string | null,
 
   /** Fallback for the avatar slot. */
   initials: "NB",

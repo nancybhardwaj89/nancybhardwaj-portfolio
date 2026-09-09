@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { Avatar } from "@/components/ui/Avatar";
 import { Container } from "@/components/ui/Container";
 import { navItems, site } from "@/content/site";
 import { cn } from "@/lib/cn";
@@ -82,19 +83,14 @@ export function Header() {
             className="group inline-flex items-center gap-2.5 text-fg"
             aria-label={`${site.name} — home`}
           >
-            <span className="inline-flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border bg-surface-raised font-display text-xs font-semibold text-fg-muted">
-              {site.avatar ? (
-                // eslint-disable-next-line @next/next/no-img-element -- fixed
-                // 32px chrome element; next/image adds no value at this size.
-                <img
-                  src={site.avatar}
-                  alt=""
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                site.initials
-              )}
-            </span>
+            <Avatar
+              src={site.avatar}
+              alt=""
+              initials={site.initials}
+              size={32}
+              className="h-8 w-8 border border-border"
+              textClassName="text-[11px]"
+            />
             <span className="font-display text-sm font-semibold tracking-tight transition-colors group-hover:text-accent">
               Nancy
               <span className="text-accent">.QA</span>

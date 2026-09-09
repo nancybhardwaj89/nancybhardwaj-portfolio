@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Avatar } from "@/components/ui/Avatar";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LinkedInIcon } from "@/components/ui/Icon";
@@ -91,27 +91,14 @@ export function Hero() {
           <Reveal delay={120}>
             <div className="relative mx-auto w-fit lg:mx-0 lg:ml-auto">
               <div className="rounded-full p-[3px] ring-2 ring-accent">
-                <div className="relative h-56 w-56 overflow-hidden rounded-full bg-surface-raised sm:h-72 sm:w-72">
-                  {site.avatar ? (
-                    <Image
-                      src={site.avatar}
-                      alt={`${site.name}, ${site.role}`}
-                      fill
-                      sizes="(min-width: 640px) 18rem, 14rem"
-                      className="object-cover"
-                      priority
-                    />
-                  ) : (
-                    // Monogram fallback — reads as intentional, not as a
-                    // failed image, until a portrait is supplied.
-                    <span
-                      aria-hidden="true"
-                      className="flex h-full w-full items-center justify-center font-display text-6xl font-semibold tracking-tight text-fg-faint"
-                    >
-                      {site.initials}
-                    </span>
-                  )}
-                </div>
+                <Avatar
+                  src={site.avatar}
+                  alt={`${site.name}, ${site.role}`}
+                  initials={site.initials}
+                  size={288}
+                  className="h-56 w-56 sm:h-72 sm:w-72"
+                  textClassName="text-6xl"
+                />
               </div>
 
               {site.availability ? (
