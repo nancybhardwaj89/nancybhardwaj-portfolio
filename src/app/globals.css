@@ -137,6 +137,45 @@ html {
 }
 
 /* ---------------------------------------------------------------------------
+   Grid band, used behind the stats. Same blueprint grid as the hero, but
+   faded at the left and right edges instead of the bottom, so the row of
+   figures sits on visible cells rather than flat ground.
+   --------------------------------------------------------------------------- */
+.grid-band {
+  position: relative;
+  isolation: isolate;
+}
+
+.grid-band::before {
+  content: "";
+  position: absolute;
+  inset: -1.5rem -2rem;
+  z-index: -1;
+  background-image: linear-gradient(
+      to right,
+      var(--border) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
    Scroll-in motion. Sections start slightly offset and settle once visible.
    --------------------------------------------------------------------------- */
 .reveal {

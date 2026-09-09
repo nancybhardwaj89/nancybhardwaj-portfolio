@@ -178,7 +178,7 @@ export function Hero() {
 
         {/* Stats band — every figure traceable to a CV claim. */}
         <Reveal delay={180}>
-          <dl className="mt-14 grid grid-cols-2 gap-y-10 border-t border-border pt-12 sm:mt-16 sm:grid-cols-4">
+          <dl className="grid-band mt-16 grid grid-cols-2 gap-y-10 py-10 sm:mt-20 sm:grid-cols-4">
             {stats.map((stat) => (
               // column-reverse so the value reads first visually while the
               // markup keeps its natural dt-then-dd order for assistive tech.
