@@ -58,7 +58,7 @@ export function Hero() {
                 href="#projects"
                 className={`${pill} bg-accent text-accent-fg hover:bg-accent-hover`}
               >
-                View projects
+                Explore case studies
               </a>
 
               {linkedin ? (

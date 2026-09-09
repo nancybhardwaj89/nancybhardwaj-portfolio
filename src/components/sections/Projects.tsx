@@ -8,7 +8,7 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      title="AI & agentic QA projects"
+      title="Case studies"
       lead="Four systems built to answer a question conventional test tooling doesn't: how do you know an AI system is behaving correctly?"
       className="bg-surface-raised"
     >
@@ -48,7 +48,7 @@ export function Projects() {
               </ul>
 
               <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-accent">
-                Read the write-up
+                Read the case study
                 <svg
                   viewBox="0 0 16 16"
                   fill="none"
