@@ -98,5 +98,4 @@ export const stats = [
   { value: "15", label: "Engineers led across time zones" },
   { value: "6+", label: "AI agents built" },
   { value: "∞", label: "Tests automated" },
-  { value: "8+", label: "Engineers mentored" },
 ] as const;
