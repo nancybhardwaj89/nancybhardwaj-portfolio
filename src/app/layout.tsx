@@ -1,31 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { site } from "@/content/site";
 import { themeScript } from "@/lib/theme-script";
+import { personSchema } from "@/lib/structured-data";
 
-// Self-hosted at build time by next/font — no external request, no layout shift.
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// All three are self-hosted at build time by next/font — no request to Google,
+// no layout shift, no render-blocking stylesheet.
+
+// Body copy. Neutral, dense, and highly legible at small sizes on mobile.
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Tool and framework names, metrics, and anything that should read as
+// "identifier" rather than prose.
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
 });
 
-// Headings only. A warm transitional serif against the neutral sans gives the
-// page some editorial weight without tipping into decorative — and it pairs
-// with the amber accent rather than fighting it.
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+// Headings only. A geometric grotesk gives the page an engineering-forward
+// voice while staying clearly distinct from the body sans.
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -54,10 +59,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema()) }}
+        />
       </head>
       <body className="flex min-h-full flex-col bg-bg text-fg">
         <a

@@ -77,10 +77,10 @@
   --color-accent-subtle: var(--accent-subtle);
   --color-accent-border: var(--accent-border);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
   /* Headings only — see layout.tsx. Applied via the `font-display` utility. */
-  --font-display: var(--font-newsreader);
+  --font-display: var(--font-space-grotesk);
 }
 
 body {

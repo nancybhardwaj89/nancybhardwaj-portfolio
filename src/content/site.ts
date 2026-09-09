@@ -1,35 +1,49 @@
 /**
  * Site-wide identity, navigation and SEO defaults.
  *
- * ⚠️ PLACEHOLDER CONTENT — anything wrapped in «guillemets» is a stand-in
- * awaiting Nancy's CV and project notes. Nothing here is invented biography:
- * placeholders are deliberately obvious so they cannot ship unnoticed.
+ * Every fact here comes from Nancy's CV. Anything still unknown is marked
+ * with a TODO and left as a placeholder rather than guessed.
  */
 
 export interface SocialLink {
   label: string;
   href: string;
-  /** Icon key resolved by components/ui/Icon.tsx */
   icon: "github" | "linkedin" | "email";
 }
 
 export const site = {
-  /** Derived from the account email — confirm the preferred display spelling. */
   name: "Nancy Bhardwaj",
-  role: "«QA / Test Automation Engineer»",
-  tagline: "«One-line positioning statement — pending CV»",
 
-  /** Used for canonical URLs, sitemap and Open Graph. Update after deploy. */
+  /** Short role for the header, tab title and OG card. */
+  role: "AI Quality Engineering Lead",
+
+  /** Full positioning line, used in the hero. */
+  roleLong: "AI Quality Engineering Lead · Test Automation Architect",
+
+  tagline:
+    "14+ years in quality engineering, now building and testing the AI agents, RAG pipelines and LLM systems that ship to production.",
+
+  location: "Noida, India",
+
+  // TODO: replace once the site is deployed — drives canonical URLs, sitemap
+  // and Open Graph.
   url: "https://example.vercel.app",
 
-  email: "«email to display — confirm»",
+  email: "er.nancybhardwaj@gmail.com",
+
+  /** On the CV but deliberately not published: a phone number on a public page
+   *  attracts recruiter spam and cannot be withdrawn once indexed. Set to a
+   *  string to show it in the contact section. */
+  phone: null as string | null,
 
   socials: [
+    // TODO: real profile URLs — the CV links them but the PDF only exposes
+    // the anchor text, not the href.
     { label: "GitHub", href: "«github url»", icon: "github" },
     { label: "LinkedIn", href: "«linkedin url»", icon: "linkedin" },
   ] as SocialLink[],
 
-  /** Set to a path under /public once a CV PDF is supplied, or null to hide. */
+  /** Set to a path under /public once a CV PDF is added, or null to hide. */
   resumeHref: null as string | null,
 } as const;
 
@@ -40,4 +54,17 @@ export const navItems = [
   { id: "experience", label: "Experience" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
+] as const;
+
+/**
+ * Headline numbers for the stats band.
+ *
+ * Each one is traceable to a specific CV claim — no rounding up, no derived
+ * figures. If a number can't be sourced, it doesn't belong here.
+ */
+export const stats = [
+  { value: "14+", label: "Years in quality engineering" },
+  { value: "15", label: "Engineers led across time zones" },
+  { value: "70%", label: "Regression execution time cut" },
+  { value: "8+", label: "Engineers mentored" },
 ] as const;
