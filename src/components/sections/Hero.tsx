@@ -178,18 +178,18 @@ export function Hero() {
 
         {/* Stats band — every figure traceable to a CV claim. */}
         <Reveal delay={180}>
-          <dl className="mt-14 grid grid-cols-2 gap-px sm:mt-16 overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+          <dl className="mt-14 grid grid-cols-2 gap-y-10 border-t border-border pt-12 sm:mt-16 sm:grid-cols-4">
             {stats.map((stat) => (
               // column-reverse so the value reads first visually while the
               // markup keeps its natural dt-then-dd order for assistive tech.
               <div
                 key={stat.label}
-                className="flex flex-col-reverse bg-surface px-5 py-6"
+                className="flex flex-col-reverse items-center px-2 text-center"
               >
-                <dt className="mt-1.5 text-sm leading-snug text-fg-muted">
+                <dt className="mt-2 text-sm leading-snug text-fg-muted">
                   {stat.label}
                 </dt>
-                <dd className="font-display text-3xl font-semibold tracking-tight text-fg">
+                <dd className="font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl">
                   {stat.value}
                 </dd>
               </div>
