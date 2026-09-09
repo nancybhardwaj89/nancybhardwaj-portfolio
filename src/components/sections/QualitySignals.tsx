@@ -16,6 +16,7 @@ export function QualitySignals() {
       id="quality"
       title="What I actually test for"
       lead="AI quality isn't one measurement. These are the dimensions I evaluate against, and what each one means in practice."
+      className="bg-surface-raised"
     >
       <dl className="overflow-hidden rounded-2xl border border-border">
         {qualitySignals.map((signal, index) => (
