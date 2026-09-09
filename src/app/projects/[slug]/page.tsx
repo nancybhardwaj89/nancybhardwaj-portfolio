@@ -5,6 +5,40 @@ import { Container } from "@/components/ui/Container";
 import { getProject, projects } from "@/content/projects";
 import { site } from "@/content/site";
 
+/**
+ * One beat of the case-study spine. Numbered so the structure is legible at a
+ * glance and consistent from project to project.
+ */
+function CaseStudySection({
+  step,
+  title,
+  lead = false,
+  children,
+}: {
+  step: string;
+  title: string;
+  lead?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      <div className="flex items-baseline gap-3">
+        <span aria-hidden="true" className="font-mono text-xs text-accent">
+          {step}
+        </span>
+        <h2 className="font-display text-lg font-semibold tracking-tight text-fg">
+          {title}
+        </h2>
+      </div>
+      <p
+        className={`mt-3 leading-relaxed text-fg-muted ${lead ? "text-lg" : ""}`}
+      >
+        {children}
+      </p>
+    </section>
+  );
+}
+
 /** One static route per project — the same data that feeds the home-page cards. */
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -75,30 +109,25 @@ export default async function ProjectPage({
         </header>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_16rem] lg:gap-16">
-          {/* Narrative column */}
-          <div className="min-w-0">
-            <p className="text-lg leading-relaxed text-fg-muted">
-              {project.overview}
-            </p>
+          {/* Case-study spine — identical order on every project page. */}
+          <div className="min-w-0 space-y-12">
+            <CaseStudySection step="01" title="Problem" lead>
+              {project.problem}
+            </CaseStudySection>
 
-            <div className="mt-12 space-y-10">
-              {project.sections.map((section) => (
-                <section key={section.title}>
-                  <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
-                    {section.title}
-                  </h2>
-                  <p className="mt-3 leading-relaxed text-fg-muted">
-                    {section.body}
-                  </p>
-                </section>
-              ))}
-            </div>
+            <CaseStudySection step="02" title="Test strategy">
+              {project.testStrategy}
+            </CaseStudySection>
 
-            {/* Evaluation gets visual weight: for a QA portfolio, how quality
-                was measured is the whole point. */}
-            <section className="mt-12 rounded-2xl border border-accent-border bg-accent-subtle p-6 sm:p-7">
-              <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
-                How quality was measured
+            <CaseStudySection step="03" title="Evaluation approach">
+              {project.approach}
+            </CaseStudySection>
+
+            {/* The metrics get their own tinted block: for a QA portfolio,
+                how quality was measured is the whole point. */}
+            <section className="rounded-2xl border border-accent-border bg-accent-subtle p-6 sm:p-7">
+              <h2 className="font-display text-lg font-semibold tracking-tight text-fg">
+                What was measured
               </h2>
               <ul className="mt-4 space-y-2.5">
                 {project.evaluation.map((item) => (
@@ -112,22 +141,26 @@ export default async function ProjectPage({
               </ul>
             </section>
 
-            {project.outcome ? (
-              <section className="mt-12">
-                <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
-                  Outcome
-                </h2>
-                <p className="mt-3 leading-relaxed text-fg-muted">
-                  {project.outcome}
-                </p>
-              </section>
+            {project.result ? (
+              <CaseStudySection step="04" title="Result">
+                {project.result}
+              </CaseStudySection>
+            ) : null}
+
+            {project.learned ? (
+              <CaseStudySection
+                step={project.result ? "05" : "04"}
+                title="What I learned"
+              >
+                {project.learned}
+              </CaseStudySection>
             ) : null}
           </div>
 
           {/* Metadata column */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <h2 className="font-display text-sm font-semibold tracking-tight text-fg">
-              Built with
+              Tools used
             </h2>
             <ul className="mt-4 flex flex-wrap gap-1.5">
               {project.stack.map((tech) => (

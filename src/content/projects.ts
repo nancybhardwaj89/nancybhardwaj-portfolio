@@ -1,16 +1,19 @@
 /**
  * The four AI / agentic QA projects, each with a detail page.
  *
- * SOURCING RULE: every sentence below is a rephrasing of a bullet on Nancy's
- * CV. Nothing is embellished — in particular, `outcome` is left null wherever
- * the CV states no measurable result, rather than inventing one. Those nulls
- * are prompts for Nancy to supply real numbers, not gaps to paper over.
+ * Every detail page follows the same case-study spine — Problem → Test
+ * strategy → Approach → Result → What I learned → Tools — so a reader can
+ * compare projects instead of re-orienting on each page.
+ *
+ * SOURCING RULES:
+ *  - `problem`, `testStrategy`, `approach`, `evaluation` and `stack` are
+ *    rephrasings of CV bullets. Nothing invented.
+ *  - `result` is null on every project because the CV states no measurable
+ *    outcome for any of them. Numbers must come from Nancy, not from here.
+ *  - `learned` is DRAFT. It is inferred from the engineering choices visible
+ *    in each architecture, not from anything Nancy has said. She must review
+ *    or delete these before the site is shared — see the note in chat.
  */
-
-export interface ProjectSection {
-  title: string;
-  body: string;
-}
 
 export interface Project {
   slug: string;
@@ -18,21 +21,23 @@ export interface Project {
   subtitle: string;
   /** One-sentence hook for the home-page card. */
   summary: string;
-  /** Short label such as "Prototype" — only where the CV supports it. */
   status?: string;
-  /** Shown on the card; keep to the 4–5 most recognisable. */
+  /** Shown on the card; the 4–5 most recognisable. */
   primaryStack: string[];
-  /** Full technology list for the detail page. */
+  /** Full technology list for the detail page sidebar. */
   stack: string[];
-  /** Opening paragraph of the detail page. */
-  overview: string;
-  /** The approach, broken into named beats. */
-  sections: ProjectSection[];
-  /** How quality was actually measured — the differentiator for a QA portfolio. */
+
+  /** Case-study spine. */
+  problem: string;
+  testStrategy: string;
+  approach: string;
+  /** The specific metrics or checks applied. */
   evaluation: string[];
-  /** TODO(nancy): supply a real, defensible metric for each of these. */
-  outcome: string | null;
-  /** TODO(nancy): repo / demo / write-up URLs where they exist and are public. */
+  /** TODO(nancy): a real, defensible metric. */
+  result: string | null;
+  /** DRAFT — see sourcing rules above. */
+  learned: string | null;
+
   links: { label: string; href: string }[];
 }
 
@@ -58,28 +63,20 @@ export const projects: Project[] = [
       "APScheduler",
       "DeepEval",
     ],
-    overview:
-      "QA knowledge is scattered by default — test cases in one tool, tickets in another, requirements in a third, and the reasoning behind past decisions buried in meeting notes. QAVentra pulls those sources into one self-hosted knowledge base that answers questions with citations, so a QA engineer can ask what was tested and why without knowing where the answer lives.",
-    sections: [
-      {
-        title: "Retrieval built for defect-shaped questions",
-        body: "Hybrid search combined with reranking, rather than plain vector similarity. QA and defect queries tend to hinge on precise identifiers and error strings that pure semantic search handles poorly, so lexical and dense retrieval run together and a cross-encoder reranks what comes back.",
-      },
-      {
-        title: "A knowledge base that stays current on its own",
-        body: "Scheduled ingestion with change detection keeps content fresh without anyone remembering to re-index. A stale knowledge base is worse than none — it answers confidently from last quarter's requirements.",
-      },
-      {
-        title: "Reachable from tools, not just a chat box",
-        body: "Packaged with Docker Compose and exposed over MCP, so AI tooling and a web chat interface both query the same knowledge base. Self-hosting is the point: test cases and tickets are exactly the material teams cannot send to a third-party service.",
-      },
-    ],
+    problem:
+      "QA knowledge is scattered by default — test cases in one tool, tickets in another, requirements in a third, and the reasoning behind past decisions buried in meeting notes. The answer to “what did we already test here, and why” usually exists, but finding it means knowing where to look. A retrieval system over that content introduces a second problem: it can answer fluently and confidently while citing the wrong source.",
+    testStrategy:
+      "Treat retrieval and generation as separately testable stages. A wrong answer has two very different causes — the right material was never retrieved, or it was retrieved and then misrepresented — and conflating them makes failures undiagnosable. Retrieval is measured on whether the correct chunks surfaced; generation is measured on whether the answer is faithful to what was retrieved and whether the citations shown actually support the claims made.",
+    approach:
+      "Hybrid search combining lexical and dense retrieval, with a cross-encoder reranking the results. QA and defect queries hinge on precise identifiers and error strings that pure semantic search handles poorly, so lexical matching earns its place alongside embeddings. Scheduled ingestion with change detection keeps the knowledge base current without anyone remembering to re-index. The whole platform is packaged with Docker Compose and exposed over MCP, so AI tooling and a web chat interface query the same source — self-hosted throughout, because test cases and tickets are exactly the material that cannot be sent to a third-party service.",
     evaluation: [
       "DeepEval for answer relevance and faithfulness",
       "Contextual precision and recall on retrieved chunks",
       "Citation accuracy — whether the sources shown actually support the answer",
     ],
-    outcome: null,
+    result: null,
+    learned:
+      "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimisation, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
     links: [
       {
         label: "Source on GitHub",
@@ -102,23 +99,19 @@ export const projects: Project[] = [
       "Promptfoo",
       "Human-in-the-Loop design",
     ],
-    overview:
-      "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no thought given to regression impact. SprintReadyAI does the first pass automatically, so the team spends its refinement time on judgement calls rather than on discovering that a story is underspecified.",
-    sections: [
-      {
-        title: "What it produces",
-        body: "For each story: a readiness score, the acceptance criteria that are missing, QA clarification questions worth asking, candidate test scenarios, likely regression impact, and a QA estimate. Structured output, so it can be scanned in seconds rather than read.",
-      },
-      {
-        title: "Human-in-the-loop by design",
-        body: "Reports land in Slack for a QA engineer to review, and only reach JIRA as a comment once a person has approved them. The agent drafts; it does not decide. That boundary is deliberate — an agent writing directly into the team's backlog is a trust problem, not a productivity gain.",
-      },
-    ],
+    problem:
+      "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no consideration of regression impact. The team's time goes into discovering that a story is underspecified rather than into the judgement calls only people can make.",
+    testStrategy:
+      "The failure mode for this agent isn't a crash, it's confident output on a story with nothing in it. A story that says three words should produce an assessment saying so, not a plausible-looking set of invented test scenarios. So the test suite is organised by input quality rather than by feature: well-defined, vague, invalid and missing stories each get their own expectations.",
+    approach:
+      "An n8n workflow pulls story detail from JIRA and analyses it from a QA angle, emitting structured output: a readiness score, the acceptance criteria that are absent, clarification questions worth asking, candidate test scenarios, likely regression impact and a QA estimate. Reports land in Slack for a QA engineer to review, and only reach JIRA as a comment once a person has approved them. The agent drafts; it does not decide.",
     evaluation: [
-      "Promptfoo evaluation across four input classes: well-defined, vague, invalid, and missing stories",
-      "Checked for response reliability and consistency — the failure mode being confident output on a story with nothing in it",
+      "Promptfoo evaluation across four input classes: well-defined, vague, invalid and missing stories",
+      "Response reliability and consistency — the failure mode being confident output on an empty story",
     ],
-    outcome: null,
+    result: null,
+    learned:
+      "The human-in-the-loop gate turned out to be the feature, not a safety compromise around it. An agent writing straight into the team's backlog is a trust problem before it is a productivity gain, and putting a review step in front of the write is what made it something colleagues would actually turn on. Testing by input quality rather than by function also surfaced far more than a happy-path suite would have.",
     links: [
       {
         label: "Source on GitHub",
@@ -144,22 +137,18 @@ export const projects: Project[] = [
       "Parent-Document Retrieval",
       "RAGAS",
     ],
-    overview:
-      "Large test suites accumulate duplicate coverage because nobody can find what already exists. TestCase Compass indexes 5,000+ test cases and answers questions about them directly — what covers this flow, what similar cases already exist, where the gaps are.",
-    sections: [
-      {
-        title: "Why a naive RAG pipeline wasn't enough",
-        body: "Test cases are short, formulaic and highly similar to one another, which is close to the worst case for plain embedding search. The pipeline uses HyDE to bridge the gap between how people ask questions and how test cases are written, then reranks results and retrieves the parent document so the answer has the full case rather than an isolated step.",
-      },
-      {
-        title: "Keeping answers grounded",
-        body: "Contextual compression trims retrieved context to what's actually relevant before it reaches the model, paired with grounded prompts — both aimed at the same failure mode of a fluent answer that cites the wrong test case.",
-      },
-    ],
+    problem:
+      "Large test suites accumulate duplicate coverage because nobody can find what already exists. With 5,000+ test cases, the practical question — does something already cover this flow, and where are the gaps — becomes unanswerable by search alone.",
+    testStrategy:
+      "Measure retrieval quality and answer quality as separate concerns, using RAGAS across five metrics. A test-case corpus is a hostile case for naive retrieval: the documents are short, formulaic and highly similar to one another, so an embedding search will happily return five near-identical cases that are all slightly wrong. Context precision and recall catch that in a way answer-level scoring alone does not.",
+    approach:
+      "HyDE bridges the gap between how people phrase questions and how test cases are written, since the two share very little surface vocabulary. Retrieved candidates are reranked, then parent-document retrieval returns the full case rather than an isolated step, so the answer has enough context to be meaningful. Contextual compression trims retrieved material to what's relevant before it reaches the model, paired with grounded prompts — both aimed at the same failure mode of a fluent answer citing the wrong test case.",
     evaluation: [
       "RAGAS across five metrics: Faithfulness, Answer Relevancy, Context Precision, Context Recall and Answer Correctness",
     ],
-    outcome: null,
+    result: null,
+    learned:
+      "Corpus shape drives pipeline design more than model choice does. A homogeneous corpus of short, near-identical documents defeats the default RAG recipe, and the fixes that mattered — HyDE, reranking, parent-document retrieval — were all about compensating for that shape rather than about the LLM at the end of the chain.",
     links: [
       {
         label: "Source on GitHub",
@@ -176,27 +165,19 @@ export const projects: Project[] = [
     status: "Prototype",
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
-    overview:
-      "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply while having called the wrong tool, passed parameters it shouldn't have had, or taken an execution path that violates policy. AssertPilot inspects the behaviour underneath the response.",
-    sections: [
-      {
-        title: "Expected-vs-actual behaviour validation",
-        body: "A framework for asserting on the trace rather than the output: which tools were selected, what parameters they received, the path taken through them, and whether that path complied with policy.",
-      },
-      {
-        title: "Security scenarios",
-        body: "Coverage for prompt injection, unauthorised data access, privilege escalation, and high-impact actions — an unauthorised refund being the concrete case. These are the agent equivalents of the abuse cases any security-minded tester would write for a conventional API.",
-      },
-      {
-        title: "Policy-driven risk and findings model",
-        body: "Classifies observed agent behaviour, flags security and business-rule violations, and produces actionable recommendations rather than a raw pass/fail. The output is meant to be read by someone deciding whether an agent is safe to ship.",
-      },
-    ],
+    problem:
+      "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply having called the wrong tool, passed parameters it should never have had access to, or taken an execution path that violates policy. The response looks correct; the behaviour underneath it was not.",
+    testStrategy:
+      "Assert on the execution trace rather than the output, using an expected-vs-actual model: which tools were selected, what parameters they received, the path taken through them, and whether that path complied with policy. Alongside the functional expectations sit adversarial scenarios, because an agent with tool access has an attack surface, not just a correctness surface.",
+    approach:
+      "A behaviour validation framework covering tool selection, parameters, execution paths, policy compliance and risk, with security scenarios for prompt injection, unauthorised data access, privilege escalation and high-impact actions — an unauthorised refund being the concrete case. A policy-driven risk and findings model classifies observed behaviour, flags security and business-rule violations, and produces actionable recommendations rather than a bare pass/fail, so the output is readable by someone deciding whether an agent is safe to ship.",
     evaluation: [
       "Assertions on execution traces — tool selection, parameters and execution path",
       "Policy compliance and risk classification per scenario",
     ],
-    outcome: null,
+    result: null,
+    learned:
+      "Testing an agent has more in common with security testing than with functional testing. The useful frame turned out to be abuse cases — what could this agent be made to do — rather than acceptance criteria, and the questions that mattered were the ones any security-minded tester would already ask of an API with privileged access.",
     links: [
       {
         label: "Source on GitHub",
