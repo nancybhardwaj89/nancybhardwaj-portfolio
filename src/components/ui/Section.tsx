@@ -27,7 +27,10 @@ export function Section({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn("scroll-mt-24 py-20 sm:py-28", className)}
+      // Vertical padding is roughly half the intended gap between sections,
+      // because adjacent sections each contribute their own. py-28 on both
+      // sides of a boundary produced ~220px of empty space.
+      className={cn("scroll-mt-24 py-14 sm:py-16", className)}
     >
       <Container>
         <Reveal>

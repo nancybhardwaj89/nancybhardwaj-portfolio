@@ -102,7 +102,7 @@ export function Hero() {
   return (
     // Bottom padding is deliberately small: the following <Section> supplies
     // its own generous top padding, and doubling them left a ~220px void.
-    <section id="top" className="hero-grid relative pt-14 pb-4 sm:pt-20 sm:pb-6">
+    <section id="top" className="hero-grid relative pt-14 pb-8 sm:pt-20 sm:pb-12">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
           {/* Text column */}
