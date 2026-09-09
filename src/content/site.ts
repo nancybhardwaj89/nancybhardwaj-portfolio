@@ -74,6 +74,7 @@ export const site = {
 /** Home-page sections, in scroll order. Drives the nav and the scroll-spy. */
 export const navItems = [
   { id: "skills", label: "Skills" },
+  { id: "quality", label: "Quality" },
   { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },
   { id: "about", label: "About" },
