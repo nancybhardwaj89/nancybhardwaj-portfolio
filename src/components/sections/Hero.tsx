@@ -3,11 +3,98 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LinkedInIcon } from "@/components/ui/Icon";
 import { site, stats } from "@/content/site";
+import { qualitySignals } from "@/content/quality-signals";
 
 /** Shared pill-button shape, so the CTA row stays consistent. */
 const pill =
   "inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-medium transition-colors";
 const pillOutline = `${pill} border border-border bg-surface text-fg hover:border-border-strong hover:bg-surface-raised`;
+
+/**
+ * Portrait paired with a panel showing the dimensions Nancy evaluates against.
+ *
+ * Deliberately carries NO scores or percentages. A hero dashboard reading
+ * "Faithfulness 0.94" would be an invented evaluation result presented as fact
+ * on a page recruiters treat as a factual claim. Listing the dimensions is
+ * honest and says the more interesting thing anyway: that AI quality is
+ * multidimensional and she has a framework for it.
+ *
+ * Rows come from the same `qualitySignals` data as the Quality section, so the
+ * two can't drift apart.
+ */
+function IdentityCard() {
+  return (
+    <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+      <div className="flex items-center gap-4">
+        <div className="shrink-0 rounded-full p-[3px] ring-2 ring-accent">
+          <Avatar
+            src={site.avatar}
+            alt={`${site.name}, ${site.role}`}
+            initials={site.initials}
+            size={112}
+            className="h-24 w-24 sm:h-28 sm:w-28"
+            textClassName="text-2xl"
+          />
+        </div>
+
+        <div className="min-w-0">
+          <p className="font-display text-lg font-semibold tracking-tight text-fg">
+            {site.name}
+          </p>
+          <p className="mt-0.5 font-mono text-xs leading-relaxed text-fg-muted">
+            {site.role}
+          </p>
+          {site.availability ? (
+            <p className="mt-2.5 inline-flex items-center gap-2 rounded-full border border-accent-border bg-accent-subtle px-2.5 py-1 font-mono text-[11px] leading-none text-accent">
+              <span
+                aria-hidden="true"
+                className="h-1.5 w-1.5 rounded-full bg-accent"
+              />
+              {site.availability}
+            </p>
+          ) : null}
+        </div>
+      </div>
+
+      {/* Quality signal panel */}
+      <div className="mt-5 rounded-xl border border-border bg-bg p-4">
+        <div className="flex items-center gap-2 border-b border-border pb-3">
+          <span aria-hidden="true" className="flex gap-1">
+            <span className="h-2 w-2 rounded-full bg-border-strong" />
+            <span className="h-2 w-2 rounded-full bg-border-strong" />
+            <span className="h-2 w-2 rounded-full bg-border-strong" />
+          </span>
+          <p className="font-mono text-[11px] tracking-wide text-fg-faint">
+            agent-quality-index
+          </p>
+        </div>
+
+        <ul className="mt-3 space-y-2">
+          {qualitySignals.map((signal) => (
+            <li
+              key={signal.dimension}
+              className="flex items-baseline gap-2 font-mono text-[11px] leading-relaxed"
+            >
+              <span aria-hidden="true" className="text-accent">
+                ✓
+              </span>
+              <span className="shrink-0 text-fg">
+                {signal.dimension.toLowerCase()}
+              </span>
+              <span className="truncate text-fg-faint">
+                {signal.tests.slice(0, 2).join(", ").toLowerCase()}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-fg-faint">
+          {qualitySignals.length} dimensions evaluated
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   const linkedin = site.socials.find((s) => s.icon === "linkedin");
@@ -81,30 +168,9 @@ export function Hero() {
             </div>
           </Reveal>
 
-          {/* Portrait column */}
+          {/* Portrait + quality panel */}
           <Reveal delay={120}>
-            <div className="relative mx-auto w-fit lg:mx-0 lg:ml-auto">
-              <div className="rounded-full p-[3px] ring-2 ring-accent">
-                <Avatar
-                  src={site.avatar}
-                  alt={`${site.name}, ${site.role}`}
-                  initials={site.initials}
-                  size={288}
-                  className="h-56 w-56 sm:h-72 sm:w-72"
-                  textClassName="text-6xl"
-                />
-              </div>
-
-              {site.availability ? (
-                <p className="absolute -bottom-1 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-surface px-4 py-2 font-mono text-xs text-fg-muted shadow-sm">
-                  <span
-                    aria-hidden="true"
-                    className="h-1.5 w-1.5 rounded-full bg-accent"
-                  />
-                  {site.availability}
-                </p>
-              ) : null}
-            </div>
+            <IdentityCard />
           </Reveal>
         </div>
 
