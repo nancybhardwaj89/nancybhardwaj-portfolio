@@ -94,7 +94,9 @@ export const navItems = [
  */
 export const stats = [
   { value: "14+", label: "Years in quality engineering" },
-  { value: "15", label: "Engineers led across time zones" },
   { value: "70%", label: "Regression execution time cut" },
+  { value: "15", label: "Engineers led across time zones" },
+  { value: "6+", label: "AI agents built" },
+  { value: "∞", label: "Tests automated" },
   { value: "8+", label: "Engineers mentored" },
 ] as const;
