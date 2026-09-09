@@ -17,7 +17,7 @@ export default function Home() {
       <section className="py-24 sm:py-32">
         <Container>
           <Badge variant="accent">Phase 1 · scaffold</Badge>
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+          <h1 className="mt-6 font-display text-5xl font-semibold tracking-tight text-fg sm:text-6xl">
             {site.name}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-muted">{site.role}</p>

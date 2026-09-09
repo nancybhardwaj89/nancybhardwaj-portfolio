@@ -26,12 +26,15 @@
   --fg-muted: #56565f;
   --fg-faint: #82828c;
 
-  /* Accent — single hue, used sparingly for links, focus and emphasis. */
-  --accent: #0f766e;
-  --accent-hover: #115e56;
+  /* Accent — single warm hue, used sparingly for links, focus and emphasis.
+     Deliberately amber-800 rather than the brighter amber-600: at ~6.6:1 on
+     this background it carries body-size link text accessibly, where the
+     brighter shade sits marginally above the 4.5:1 floor. */
+  --accent: #92400e;
+  --accent-hover: #7c3308;
   --accent-fg: #ffffff;
-  --accent-subtle: #eefaf7;
-  --accent-border: #b6e3da;
+  --accent-subtle: #fdf5ea;
+  --accent-border: #f0d9b5;
 }
 
 .dark {
@@ -47,11 +50,12 @@
   --fg-muted: #a5a5b0;
   --fg-faint: #78787f;
 
-  --accent: #2dd4bf;
-  --accent-hover: #5eead4;
-  --accent-fg: #05201d;
-  --accent-subtle: #10312d;
-  --accent-border: #1d5951;
+  /* On dark, amber can be bright: #fbbf24 reads ~11:1 against this ground. */
+  --accent: #fbbf24;
+  --accent-hover: #fcd34d;
+  --accent-fg: #2a1a02;
+  --accent-subtle: #2a1c06;
+  --accent-border: #573b0d;
 }
 
 /* Expose the tokens to Tailwind so `bg-surface`, `text-fg-muted`,
@@ -75,6 +79,8 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* Headings only — see layout.tsx. Applied via the `font-display` utility. */
+  --font-display: var(--font-newsreader);
 }
 
 body {

@@ -34,7 +34,7 @@ export function Section({
           <div className="max-w-2xl">
             <h2
               id={headingId}
-              className="text-2xl font-semibold tracking-tight text-fg sm:text-3xl"
+              className="font-display text-3xl font-semibold tracking-tight text-fg sm:text-4xl"
             >
               {title}
             </h2>
