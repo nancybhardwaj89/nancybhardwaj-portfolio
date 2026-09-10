@@ -10,7 +10,7 @@ export function Projects() {
     <Section
       id="projects"
       title="Projects & Case Studies"
-      lead="Enterprise delivery, and the AI systems I've built to explore how we can test, evaluate, and trust AI behavior beyond the final response."
+      lead="A selection of AI and QA engineering systems I've designed, built, and evaluated — from RAG and AI agents to automation and quality workflows."
     >
       <ProjectGrid />
     </Section>
