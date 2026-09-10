@@ -36,7 +36,10 @@ export function Experience() {
                     {role.projects.map((project) => (
                       <li
                         key={project}
-                        className="rounded-md border border-border bg-surface-raised px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
+                        // bg-surface reads against both the plain and raised
+                        // section grounds, so it survives the alternation
+                        // regardless of where this section lands in the order.
+                        className="rounded-md border border-border bg-surface px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
                       >
                         {project}
                       </li>

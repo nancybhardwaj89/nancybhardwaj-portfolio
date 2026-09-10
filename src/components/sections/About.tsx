@@ -10,7 +10,7 @@ import {
 
 export function About() {
   return (
-    <Section id="about" title="About" className="bg-surface-raised">
+    <Section id="about" title="About">
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
         <Reveal>
           <div className="space-y-5 text-base leading-relaxed text-fg-muted">
