@@ -128,12 +128,14 @@ export function Hero() {
               {site.tagline}
             </p>
 
-            <p className="mt-3 font-mono text-sm text-fg-muted sm:text-base">
-              Test Automation Architect · Agentic AI QA
-            </p>
-
             <p className="mt-6 max-w-xl text-base leading-relaxed text-fg-muted">
               {site.intro}
+            </p>
+
+            {/* The automation credential sits after the AI positioning, not
+                before it — supporting evidence rather than the headline. */}
+            <p className="mt-5 font-mono text-sm text-fg-faint">
+              Test Automation Architect · Agentic AI QA
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-2.5">

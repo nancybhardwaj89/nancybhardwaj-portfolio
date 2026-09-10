@@ -22,11 +22,20 @@ export const site = {
 
   /** The hook, shown at display size in the hero. */
   tagline:
-    "I test what happens when software starts thinking, deciding, and acting.",
+    "Engineering quality for AI agents, RAG systems and intelligent applications.",
 
-  /** The supporting paragraph, and the meta description for search results. */
+  /** The supporting paragraph in the hero. */
   intro:
-    "I build quality systems for AI-powered software. With 14+ years of experience in Playwright, Selenium, CI/CD, and test automation, I specialize in LLM and RAG evaluation, agent behavior validation, security testing, observability, and Salesforce Agentforce quality engineering.",
+    "I don't just test AI responses. I test the reasoning, retrieval, tools, safety and outcomes behind them.",
+
+  /**
+   * Meta description for search and social cards — deliberately NOT the hero
+   * copy. The hero is written to be read; this is written to be matched, and
+   * carries the concrete terms a recruiter actually searches for. Those terms
+   * are all still on the page, in Skills and Experience.
+   */
+  metaDescription:
+    "AI Quality Engineering Lead with 14+ years in test automation. LLM and RAG evaluation (RAGAS, DeepEval, Promptfoo), AI agent behavior validation, AI red teaming, Salesforce Agentforce testing, Playwright, TypeScript, Python and CI/CD.",
 
   location: "Noida, India",
 
@@ -72,8 +81,12 @@ export const site = {
   /** Availability badge on the portrait. Set to null to hide it entirely. */
   availability: "Open to work" as string | null,
 
-  /** Short credentials strip above the headline. */
-  eyebrow: ["AI Quality Engineering Lead", "14+ years", "India"],
+  /**
+   * Credentials strip above the headline. Deliberately excludes the role —
+   * it appears directly below in the accent line, and repeating it two
+   * elements apart reads as a mistake.
+   */
+  eyebrow: ["14+ years in quality engineering", "Noida, India"],
 } as const;
 
 /** Home-page sections, in scroll order. Drives the nav and the scroll-spy. */
