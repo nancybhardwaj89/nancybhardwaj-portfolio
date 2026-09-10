@@ -12,7 +12,22 @@ export function Skills() {
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {skillGroups.map((group, index) => (
-          <Reveal key={group.title} delay={Math.min(index, 4) * 60}>
+          <Reveal
+            key={group.title}
+            delay={Math.min(index, 4) * 60}
+            // An odd final card would otherwise sit alone in its row. Let it
+            // span the remaining columns so the grid reads as deliberate.
+            className={
+              index === skillGroups.length - 1
+                ? [
+                    skillGroups.length % 2 === 1 ? "sm:col-span-2" : "",
+                    skillGroups.length % 3 === 1 ? "lg:col-span-3" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")
+                : undefined
+            }
+          >
             <Card className="h-full">
               <h3 className="font-display text-base font-semibold tracking-tight text-fg">
                 {group.title}

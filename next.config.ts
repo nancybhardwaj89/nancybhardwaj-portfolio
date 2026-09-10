@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
   // Emit `about/index.html` rather than `about.html` so paths resolve
   // consistently on any static host.
   trailingSlash: true,
+
+  // Hides the floating dev-only route indicator, which reads as a stray "N"
+  // badge on the page during review. It never shipped in the production
+  // build; this just keeps local review honest. Compile and runtime errors
+  // are still surfaced.
+  devIndicators: false,
 };
 
 export default nextConfig;

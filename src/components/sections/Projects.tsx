@@ -45,7 +45,7 @@ const cards: ProjectCard[] = [
   })),
 ];
 
-function Card({ card }: { card: ProjectCard }) {
+function Card({ card, wide = false }: { card: ProjectCard; wide?: boolean }) {
   return (
     <div className="depth-card flex h-full flex-col rounded-2xl border border-border bg-surface p-6 hover:border-accent-border">
       <div className="flex items-start justify-between gap-3">
@@ -62,29 +62,47 @@ function Card({ card }: { card: ProjectCard }) {
       <p className="mt-1.5 text-sm text-fg-faint">{card.subtitle}</p>
 
       <h4 className={`${blockLabel} mt-5`}>Problem</h4>
-      <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+      <p
+        className={`mt-2 text-sm leading-relaxed text-fg-muted ${
+          wide ? "max-w-3xl" : ""
+        }`}
+      >
         {card.problemShort}
       </p>
 
-      <h4 className={`${blockLabel} mt-5`}>What I built</h4>
-      <ul className="mt-2.5 space-y-1.5">
-        {card.built.map((item) => (
-          <li key={item} className={bullet}>
-            {item}
-          </li>
-        ))}
-      </ul>
+      {/* When the card spans the full grid, the two lists sit side by side.
+          Left as one column they would stretch to ~1100px per line, which is
+          well past comfortable reading width.
+          flex-1 keeps the stack and link aligned across cards in a row. */}
+      <div
+        className={
+          wide
+            ? "mt-5 grid flex-1 gap-x-10 gap-y-5 sm:grid-cols-2"
+            : "mt-5 flex-1"
+        }
+      >
+        <div>
+          <h4 className={blockLabel}>What I built</h4>
+          <ul className="mt-2.5 space-y-1.5">
+            {card.built.map((item) => (
+              <li key={item} className={bullet}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <h4 className={`${blockLabel} mt-5`}>Quality / evaluation</h4>
-      {/* flex-1 here so the stack and link align across cards of differing
-          content length within a row. */}
-      <ul className="mt-2.5 flex-1 space-y-1.5">
-        {card.evaluation.map((item) => (
-          <li key={item} className={bullet}>
-            {item}
-          </li>
-        ))}
-      </ul>
+        <div className={wide ? undefined : "mt-5"}>
+          <h4 className={blockLabel}>Quality / evaluation</h4>
+          <ul className="mt-2.5 space-y-1.5">
+            {card.evaluation.map((item) => (
+              <li key={item} className={bullet}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
       <ul className="mt-5 flex flex-wrap gap-1.5">
         {card.primaryStack.map((tech) => (
@@ -133,11 +151,21 @@ export function Projects() {
       lead="Real-world AI systems built to explore how we can test, evaluate, and trust AI behavior beyond the final response."
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        {cards.map((card, index) => (
-          <Reveal key={card.name} delay={Math.min(index, 4) * 60}>
-            <Card card={card} />
-          </Reveal>
-        ))}
+        {cards.map((card, index) => {
+          // An odd final card would sit alone in the two-column grid.
+          const wide =
+            index === cards.length - 1 && cards.length % 2 === 1;
+
+          return (
+            <Reveal
+              key={card.name}
+              delay={Math.min(index, 4) * 60}
+              className={wide ? "sm:col-span-2" : undefined}
+            >
+              <Card card={card} wide={wide} />
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );
