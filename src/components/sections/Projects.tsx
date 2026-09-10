@@ -130,7 +130,7 @@ export function Projects() {
     <Section
       id="projects"
       title="Case studies"
-      lead="Systems built to answer a question conventional test tooling doesn't: how do you know an AI system is behaving correctly?"
+      lead="Real-world AI systems built to explore how we can test, evaluate, and trust AI behavior beyond the final response."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {cards.map((card, index) => (
