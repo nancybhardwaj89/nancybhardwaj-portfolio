@@ -207,7 +207,6 @@ export const projects: Project[] = [
     subtitle: "AI agent QA and security observatory",
     summary:
       "Validates what an AI agent actually did — tool selection, parameters, execution path, policy compliance — rather than only judging its final response.",
-    status: "Prototype",
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     problemShort:
