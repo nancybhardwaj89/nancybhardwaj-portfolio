@@ -148,7 +148,7 @@ export function RecruiterView({
                 download
                 className={`${linkClass} border-accent bg-accent text-accent-fg hover:bg-accent-hover`}
               >
-                Download résumé
+                Download CV
               </a>
             ) : null}
 

@@ -166,7 +166,7 @@ export function Hero() {
 
               {site.resumeHref ? (
                 <a href={site.resumeHref} download className={pillOutline}>
-                  Download résumé
+                  Download CV
                 </a>
               ) : null}
             </div>
