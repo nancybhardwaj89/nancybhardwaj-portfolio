@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { clientWork } from "@/content/client-work";
 import { moreRepos, projects } from "@/content/projects";
 
 /**
@@ -11,6 +12,8 @@ interface ProjectCard {
   name: string;
   subtitle: string;
   status?: string;
+  /** e.g. "Client engagement" — distinguishes delivery work from side projects. */
+  context?: string;
   problemShort: string;
   built: string[];
   evaluation: string[];
@@ -25,6 +28,18 @@ const bullet =
   "relative pl-4 text-sm leading-relaxed text-fg-muted before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-accent";
 
 const cards: ProjectCard[] = [
+  // Client engagements lead: fourteen years of enterprise delivery is the
+  // stronger signal, and it was previously buried in Experience bullets.
+  ...clientWork.map((project) => ({
+    name: project.name,
+    subtitle: project.subtitle,
+    context: project.context,
+    problemShort: project.problemShort,
+    built: project.built,
+    evaluation: project.evaluation,
+    result: project.result,
+    primaryStack: project.primaryStack,
+  })),
   ...projects.map((project) => ({
     name: project.name,
     subtitle: project.subtitle,
@@ -55,6 +70,11 @@ function Card({ card, wide = false }: { card: ProjectCard; wide?: boolean }) {
         <h3 className="font-display text-xl font-semibold tracking-tight text-fg">
           {card.name}
         </h3>
+        {card.context ? (
+          <span className="shrink-0 rounded-md border border-accent-border bg-accent-subtle px-2 py-1 font-mono text-[11px] leading-none text-accent">
+            {card.context}
+          </span>
+        ) : null}
         {card.status ? (
           <span className="shrink-0 rounded-md border border-border px-2 py-1 font-mono text-[11px] leading-none text-fg-faint">
             {card.status}
@@ -170,7 +190,7 @@ export function Projects() {
     <Section
       id="projects"
       title="Case studies"
-      lead="Real-world AI systems built to explore how we can test, evaluate, and trust AI behavior beyond the final response."
+      lead="Enterprise delivery, and the AI systems I've built to explore how we can test, evaluate, and trust AI behavior beyond the final response."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {cards.map((card, index) => {
