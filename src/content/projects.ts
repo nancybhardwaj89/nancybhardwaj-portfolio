@@ -73,7 +73,7 @@ export const projects: Project[] = [
   {
     slug: "qaventra",
     context: "Client engagement",
-    category: "RAG systems",
+    category: "RAG & Evaluation",
     name: "QAVentra",
     subtitle: "QA Knowledge Intelligence Platform",
     summary:
@@ -177,7 +177,7 @@ export const projects: Project[] = [
   {
     slug: "testcase-compass",
     context: "Client engagement",
-    category: "RAG systems",
+    category: "RAG & Evaluation",
     name: "TestCase Compass",
     subtitle: "Advanced RAG Assistant for Test Cases",
     summary:
@@ -231,19 +231,20 @@ export const projects: Project[] = [
     slug: "assertpilot",
     category: "Agent QA & security",
     name: "AssertPilot",
-    subtitle: "AI agent QA and security observatory",
+    subtitle: "AI Agent QA & Security Observatory",
     summary:
       "Validates what an AI agent actually did — tool selection, parameters, execution path, policy compliance — rather than only judging its final response.",
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     problemShort:
-      "A correct-looking response doesn't prove correct agent behavior. An AI agent can select the wrong tool, pass unsafe parameters or violate policy while still producing a seemingly valid final answer.",
+      "Traditional AI testing often evaluates only the final response, making it difficult to detect incorrect tool selection, unsafe actions, or policy violations.",
     built: [
-      "Observes the actual agent execution path, not just the final response",
-      "Validates tool selection and tool parameters",
+      "Observes actual agent execution paths",
+      "Validates tool selection and parameters",
+      "Captures execution traces",
       "Detects policy violations and unauthorized actions",
-      "Captures execution traces for investigation",
-      "Models agent QA and security risks",
+      "Tests prompt injection and privilege escalation scenarios",
+      "Provides risk-based findings",
     ],
     problem:
       "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply having called the wrong tool, passed parameters it should never have had access to, or taken an execution path that violates policy. The response looks correct; the behavior underneath it was not.",
@@ -251,14 +252,10 @@ export const projects: Project[] = [
       "Assert on the execution trace rather than the output, using an expected-vs-actual model: which tools were selected, what parameters they received, the path taken through them, and whether that path complied with policy. Alongside the functional expectations sit adversarial scenarios, because an agent with tool access has an attack surface, not just a correctness surface.",
     approach:
       "A behavior validation framework covering tool selection, parameters, execution paths, policy compliance and risk, with security scenarios for prompt injection, unauthorized data access, privilege escalation and high-impact actions — an unauthorized refund being the concrete case. A policy-driven risk and findings model classifies observed behavior, flags security and business-rule violations, and produces actionable recommendations rather than a bare pass/fail, so the output is readable by someone deciding whether an agent is safe to ship.",
-    evaluation: [
-      "Tool-call and parameter validation",
-      "Policy compliance checks",
-      "Prompt injection and data-access scenarios",
-      "Privilege escalation testing",
-      "Execution-path analysis for high-risk actions",
+    evaluation: [],
+    result: [
+      "Extends AI testing beyond the final answer to what the agent actually decided and did",
     ],
-    result: [],
     learned:
       "Testing an agent has more in common with security testing than with functional testing. The useful frame turned out to be abuse cases — what could this agent be made to do — rather than acceptance criteria, and the questions that mattered were the ones any security-minded tester would already ask of an API with privileged access.",
     links: [
@@ -282,6 +279,7 @@ export interface RepoProject {
   name: string;
   subtitle: string;
   category: string;
+  result: string[];
   problemShort: string;
   built: string[];
   evaluation: string[];
@@ -291,32 +289,28 @@ export interface RepoProject {
 
 export const moreRepos: RepoProject[] = [
   {
-    name: "AI IT Ticket Triage Agent",
+    name: "AI IT Support Triage",
     category: "AI agents",
-    subtitle: "Human-in-the-loop multi-agent workflow for IT ticket triage",
+    subtitle: "Human-in-the-Loop Multi-Agent Workflow",
     problemShort:
-      "IT support teams spend significant time manually classifying, prioritizing and routing incoming tickets. Automating these decisions without appropriate controls can also introduce risk when an AI system is uncertain or handling high-impact requests.",
+      "IT support teams spend time manually classifying, prioritizing, and routing incoming tickets.",
     built: [
-      "Multi-agent n8n workflow for automated IT ticket triage",
-      "LLM-based classification of category, severity, confidence and reasoning",
-      "Confidence- and severity-based routing between auto and human-review paths",
-      "Resolver agent that drafts responses for low-risk requests",
-      "Slack-based human approval for uncertain or high-severity tickets",
-      "End-to-end decision logging for auditability and traceability",
+      "Multi-agent ticket triage workflow",
+      "Ticket classification and prioritization",
+      "Confidence-based routing",
+      "Automated vs. human-review paths",
+      "Safe handling of uncertain cases",
+      "Decision and workflow logging",
     ],
-    evaluation: [
-      "Low-risk requests route to the auto-draft path",
-      "High-severity requests route to human review",
-      "Low-confidence requests route to human review",
-      "Invalid or non-JSON AI responses fail safely",
-      "Both automated and human escalation paths validated",
+    evaluation: [],
+    result: [
+      "Automates repetitive triage while keeping humans in control of higher-risk or uncertain decisions",
     ],
     primaryStack: [
       "n8n",
       "Groq",
       "Multi-Agent",
       "Slack",
-      "Google Sheets",
       "Human-in-the-loop",
     ],
     href: "https://github.com/nancybhardwaj89/AIAgent-IT-Support-Triage-multi-agent-n8n",

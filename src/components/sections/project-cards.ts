@@ -56,7 +56,7 @@ export const cards: ProjectCard[] = [
     problemShort: repo.problemShort,
     built: repo.built,
     evaluation: repo.evaluation,
-    result: [] as string[],
+    result: repo.result,
     primaryStack: repo.primaryStack,
     href: repo.href,
   })),
