@@ -93,7 +93,6 @@ export function Header() {
             />
             <span className="font-display text-sm font-semibold tracking-tight transition-colors group-hover:text-accent">
               Nancy
-              <span className="text-accent">.QA</span>
             </span>
           </Link>
 
