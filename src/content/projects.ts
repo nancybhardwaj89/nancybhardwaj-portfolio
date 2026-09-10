@@ -27,6 +27,13 @@ export interface Project {
   /** Full technology list for the detail page sidebar. */
   stack: string[];
 
+  /**
+   * "What I built" — the concrete capabilities, shown on the card itself.
+   * These exist so a recruiter gets the substance without clicking through to
+   * the detail page, which most won't.
+   */
+  built: string[];
+
   /** Case-study spine. */
   problem: string;
   testStrategy: string;
@@ -63,6 +70,13 @@ export const projects: Project[] = [
       "APScheduler",
       "DeepEval",
     ],
+    built: [
+      "Hybrid search: semantic + keyword retrieval",
+      "MCP interface for AI-assisted access to QA knowledge",
+      "Citation-backed answers to reduce hallucination",
+      "Scheduled ingestion with change detection",
+      "Self-hosted architecture for controlled data access",
+    ],
     problem:
       "QA knowledge is scattered by default — test cases in one tool, tickets in another, requirements in a third, and the reasoning behind past decisions buried in meeting notes. The answer to “what did we already test here, and why” usually exists, but finding it means knowing where to look. A retrieval system over that content introduces a second problem: it can answer fluently and confidently while citing the wrong source.",
     testStrategy:
@@ -98,6 +112,16 @@ export const projects: Project[] = [
       "Slack",
       "Promptfoo",
       "Human-in-the-Loop design",
+    ],
+    built: [
+      "n8n-based QA refinement agent over JIRA stories",
+      "Identifies missing acceptance criteria and test scenarios",
+      "Generates QA clarification questions",
+      "Produces a readiness score and QA estimate",
+      "Slack review gate before anything reaches the ticket",
+      // Kept to what the CV states — Promptfoo covers four input classes.
+      // "Regression and hallucination testing" would overstate it.
+      "Promptfoo evaluation across well-defined, vague, invalid and missing stories",
     ],
     problem:
       "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no consideration of regression impact. The team's time goes into discovering that a story is underspecified rather than into the judgment calls only people can make.",
@@ -137,6 +161,16 @@ export const projects: Project[] = [
       "Parent-Document Retrieval",
       "RAGAS",
     ],
+    built: [
+      "RAG assistant over 5,000+ test cases",
+      "HyDE-based query expansion",
+      // "Hybrid retrieval" belongs to QAVentra; this pipeline uses Mistral
+      // embeddings over ChromaDB, so it's described as it actually is.
+      "Mistral embeddings over ChromaDB",
+      "NVIDIA reranking and contextual compression",
+      "Parent-document retrieval for full-case context",
+      "RAGAS evaluation across five metrics",
+    ],
     problem:
       "Large test suites accumulate duplicate coverage because nobody can find what already exists. With 5,000+ test cases, the practical question — does something already cover this flow, and where are the gaps — becomes unanswerable by search alone.",
     testStrategy:
@@ -165,6 +199,16 @@ export const projects: Project[] = [
     status: "Prototype",
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
+    built: [
+      "Observes the actual agent execution path, not just the final answer",
+      "Validates tool selection and tool parameters",
+      "Detects policy violations and unauthorized actions",
+      "Captures execution traces for investigation",
+      "Security scenarios: prompt injection, data access, privilege escalation",
+      // "UAT validation" isn't supported anywhere on the CV, so this stops at
+      // agent QA and security.
+      "Policy-driven risk and findings model for agent QA and security",
+    ],
     problem:
       "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply having called the wrong tool, passed parameters it should never have had access to, or taken an execution path that violates policy. The response looks correct; the behavior underneath it was not.",
     testStrategy:
