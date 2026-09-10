@@ -3,7 +3,21 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LinkedInIcon } from "@/components/ui/Icon";
 import { site, stats } from "@/content/site";
-import { loopCycle, loopNote, loopSteps } from "@/content/learning-loop";
+import {
+  evalCaption,
+  evalFilename,
+  evalLines,
+  type Tone,
+} from "@/content/eval-snippet";
+
+/** Syntax tones, kept to three colours so the panel stays quiet. */
+const TONE_CLASS: Record<Tone, string> = {
+  comment: "text-fg-faint",
+  fn: "text-accent",
+  arg: "text-fg-muted",
+  plain: "text-fg",
+  num: "text-fg",
+};
 
 /** Shared pill-button shape, so the CTA row stays consistent. */
 const pill =
@@ -51,8 +65,8 @@ function IdentityCard() {
         </div>
       </div>
 
-      {/* Learning loop panel */}
-      <div className="mt-5 rounded-xl border border-border bg-bg p-4">
+      {/* Evaluation snippet panel */}
+      <div className="mt-5 overflow-hidden rounded-xl border border-border bg-bg p-4">
         <div className="flex items-center gap-2 border-b border-border pb-3">
           <span aria-hidden="true" className="flex gap-1">
             <span className="h-2 w-2 rounded-full bg-border-strong" />
@@ -60,36 +74,28 @@ function IdentityCard() {
             <span className="h-2 w-2 rounded-full bg-border-strong" />
           </span>
           <p className="font-mono text-[11px] tracking-wide text-fg-faint">
-            learning-loop
+            {evalFilename}
           </p>
         </div>
 
-        <ul className="mt-3 space-y-2.5">
-          {loopSteps.map((step) => (
-            <li key={step.label} className="flex gap-2 font-mono text-[11px]">
-              <span aria-hidden="true" className="text-accent">
-                ✓
+        {/* overflow-x-auto rather than wrapping: broken indentation reads as
+            a mistake, and this is meant to look like real code. */}
+        <pre className="mt-3 overflow-x-auto font-mono text-[11px] leading-relaxed">
+          <code>
+            {evalLines.map((line, index) => (
+              <span key={index} className="block min-h-[1.4em]">
+                {line.map(([text, tone], tokenIndex) => (
+                  <span key={tokenIndex} className={TONE_CLASS[tone]}>
+                    {text}
+                  </span>
+                ))}
               </span>
-              <span className="min-w-0">
-                <span className="block text-fg">{step.label}</span>
-                <span className="block leading-relaxed text-fg-faint">
-                  {step.detail}
-                </span>
-              </span>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </code>
+        </pre>
 
-        <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-accent">
-          {loopCycle}
-        </p>
-
-        <p className="mt-3 font-mono text-[11px] leading-relaxed text-fg-muted">
-          {loopNote.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
+        <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-fg-faint">
+          {evalCaption}
         </p>
       </div>
     </div>
