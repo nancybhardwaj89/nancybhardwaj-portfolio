@@ -11,7 +11,7 @@ export function Experience() {
     <Section
       id="experience"
       title="Experience"
-      lead="Fourteen years from manual testing to architecting automation and AI-quality practice."
+      lead="14+ years of evolving from hands-on testing to leading quality engineering, automation, and AI-driven quality initiatives."
     >
       <ol className="space-y-10">
         {roles.map((role, index) => (
