@@ -56,14 +56,6 @@ export interface Project {
    */
   result: string[];
 
-  /** Screenshot or architecture diagram, as a path under /public. */
-  media?: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    caption: string;
-  };
   /** DRAFT — see sourcing rules above. */
   learned: string | null;
 
@@ -113,13 +105,6 @@ export const projects: Project[] = [
       "Citation accuracy — whether the sources shown actually support the answer",
     ],
     result: [],
-    media: {
-      src: "/projects/qaventra.png",
-      alt: "QAVentra interface: a search box over the QA knowledge base with quick actions for test coverage, defect tracing and PRD analysis.",
-      width: 1400,
-      height: 661,
-      caption: "The assistant, grounded in a synced QA knowledge base.",
-    },
     learned:
       "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimization, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
     links: [
@@ -215,13 +200,6 @@ export const projects: Project[] = [
       "Grounded-answer evaluation against retrieved test-case context",
     ],
     result: [],
-    media: {
-      src: "/projects/testcase-compass.png",
-      alt: "The TestCase Compass LangFlow pipeline: ingestion and chunking into ChromaDB, then HyDE query expansion, NVIDIA reranking, contextual compression and parent-document retrieval feeding a Groq model.",
-      width: 1400,
-      height: 718,
-      caption: "The full retrieval pipeline, from ingestion to grounded answer.",
-    },
     learned:
       "Corpus shape drives pipeline design more than model choice does. A homogeneous corpus of short, near-identical documents defeats the default RAG recipe, and the fixes that mattered — HyDE, reranking, parent-document retrieval — were all about compensating for that shape rather than about the LLM at the end of the chain.",
     links: [
