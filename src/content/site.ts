@@ -39,9 +39,9 @@ export const site = {
 
   location: "Noida, India",
 
-  // TODO: replace once the site is deployed — drives canonical URLs, sitemap
-  // and Open Graph.
-  url: "https://example.vercel.app",
+  // Drives canonical URLs, the sitemap and Open Graph tags. No trailing
+  // slash: those are appended where needed.
+  url: "https://nancybhardwaj-portfolio.vercel.app",
 
   email: "er.nancybhardwaj@gmail.com",
 
