@@ -159,9 +159,6 @@ export const projects: Project[] = [
     evaluation: [],
     result: [
       "Reduces repetitive QA refinement effort while creating a more consistent readiness assessment",
-      // Counted directly from eval_promptfoo/promptfooconfig.yaml in the repo:
-      // 10 `- description:` cases, 23 `- type:` assertions.
-      "10-case Promptfoo suite with 23 assertions, covering readiness banding, verdict consistency, prompt injection, jailbreak, credential leakage and toxicity refusal",
     ],
     learned:
       "The human-in-the-loop gate turned out to be the feature, not a safety compromise around it. An agent writing straight into the team's backlog is a trust problem before it is a productivity gain, and putting a review step in front of the write is what made it something colleagues would actually turn on. Testing by input quality rather than by function also surfaced far more than a happy-path suite would have.",
