@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { LinkedInIcon } from "@/components/ui/Icon";
 import { site, stats } from "@/content/site";
-import { qualitySignals } from "@/content/quality-signals";
+import { loopCycle, loopNote, loopSteps } from "@/content/learning-loop";
 
 /** Shared pill-button shape, so the CTA row stays consistent. */
 const pill =
@@ -11,16 +11,11 @@ const pill =
 const pillOutline = `${pill} border border-border bg-surface text-fg hover:border-border-strong hover:bg-surface-raised`;
 
 /**
- * Portrait paired with a panel showing the dimensions Nancy evaluates against.
+ * Portrait paired with a terminal-style panel describing how Nancy works.
  *
- * Deliberately carries NO scores or percentages. A hero dashboard reading
- * "Faithfulness 0.94" would be an invented evaluation result presented as fact
- * on a page recruiters treat as a factual claim. Listing the dimensions is
- * honest and says the more interesting thing anyway: that AI quality is
- * multidimensional and she has a framework for it.
- *
- * Rows come from the same `qualitySignals` data as the Quality section, so the
- * two can't drift apart.
+ * Deliberately carries no scores or percentages: a hero dashboard reading
+ * "Faithfulness 0.94" would be an invented evaluation result presented as
+ * fact, in the most prominent place on the page.
  */
 function IdentityCard() {
   return (
@@ -56,7 +51,7 @@ function IdentityCard() {
         </div>
       </div>
 
-      {/* Quality signal panel */}
+      {/* Learning loop panel */}
       <div className="mt-5 rounded-xl border border-border bg-bg p-4">
         <div className="flex items-center gap-2 border-b border-border pb-3">
           <span aria-hidden="true" className="flex gap-1">
@@ -65,31 +60,36 @@ function IdentityCard() {
             <span className="h-2 w-2 rounded-full bg-border-strong" />
           </span>
           <p className="font-mono text-[11px] tracking-wide text-fg-faint">
-            agent-quality-index
+            learning-loop
           </p>
         </div>
 
-        <ul className="mt-3 space-y-2">
-          {qualitySignals.map((signal) => (
-            <li
-              key={signal.dimension}
-              className="flex items-baseline gap-2 font-mono text-[11px] leading-relaxed"
-            >
+        <ul className="mt-3 space-y-2.5">
+          {loopSteps.map((step) => (
+            <li key={step.label} className="flex gap-2 font-mono text-[11px]">
               <span aria-hidden="true" className="text-accent">
                 ✓
               </span>
-              <span className="shrink-0 text-fg">
-                {signal.dimension.toLowerCase()}
-              </span>
-              <span className="truncate text-fg-faint">
-                {signal.tests.slice(0, 2).join(", ").toLowerCase()}
+              <span className="min-w-0">
+                <span className="block text-fg">{step.label}</span>
+                <span className="block leading-relaxed text-fg-faint">
+                  {step.detail}
+                </span>
               </span>
             </li>
           ))}
         </ul>
 
-        <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-fg-faint">
-          {qualitySignals.length} dimensions evaluated
+        <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-accent">
+          {loopCycle}
+        </p>
+
+        <p className="mt-3 font-mono text-[11px] leading-relaxed text-fg-muted">
+          {loopNote.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
         </p>
       </div>
     </div>
