@@ -40,15 +40,11 @@ export const clientWork: ClientProject[] = [
     built: [
       "Playwright + TypeScript framework built on the Page Object Model",
       "Jenkins CI/CD integration for automated, parallel test execution",
-      "Azure DevOps pipelines running Newman for API test execution",
-      "Newman reporting for visibility into API results across the team",
-      "Automated pipeline notifications to Email and Teams via Power Automate",
       "Playwright MCP for AI-assisted, natural-language-driven test authoring",
     ],
     evaluation: [
       "Regression execution time measured before and after parallelization",
-      "API responses validated against contract via Postman and Newman",
-      "Pipeline results surfaced to the team rather than left in the runner",
+      "Suites executed on every Jenkins run rather than on request",
     ],
     result: ["70% reduction in regression execution time"],
     primaryStack: [
@@ -57,6 +53,34 @@ export const clientWork: ClientProject[] = [
       "Jenkins",
       "Azure DevOps",
       "Newman",
+    ],
+  },
+  {
+    name: "API CI/CD & pipeline reporting",
+    subtitle: "Automated API regression and failure visibility in Azure DevOps",
+    context: "Client engagement",
+    category: "Automation",
+    problemShort:
+      "API regression was run and read by hand: results lived in whoever ran the collection, and a failed pipeline went unnoticed until somebody thought to check. The gap was filled by manual coordination.",
+    built: [
+      "Azure DevOps CI/CD pipelines running Postman collections through Newman",
+      "API regression executed automatically on every pipeline run",
+      "Newman reporting for visibility and analysis of API results",
+      "Power Automate workflows linking Azure DevOps to Teams and email",
+      "Pipeline failure notifications routed to the team automatically",
+    ],
+    evaluation: [
+      "API responses validated against expected contract via Postman assertions",
+      "Regression run on every pipeline execution rather than on request",
+      "Pipeline events surfaced to the team rather than left in the runner",
+    ],
+    result: ["Manual coordination of pipeline status eliminated"],
+    primaryStack: [
+      "Postman",
+      "Newman",
+      "Azure DevOps",
+      "Power Automate",
+      "Teams",
     ],
   },
   {
