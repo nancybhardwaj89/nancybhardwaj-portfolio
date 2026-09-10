@@ -1,6 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
-import { Architecture } from "@/components/sections/Architecture";
-import { Pyramid } from "@/components/sections/Pyramid";
+import { QualityEngineering } from "@/components/sections/QualityEngineering";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
@@ -11,8 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Architecture />
-      <Pyramid />
+      <QualityEngineering />
       <Skills />
       <Projects />
       <Experience />
