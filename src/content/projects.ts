@@ -34,6 +34,12 @@ export interface Project {
    */
   built: string[];
 
+  /**
+   * One-sentence framing for the card. A condensed form of `problem` below,
+   * which runs to a paragraph and is too long for a card.
+   */
+  problemShort: string;
+
   /** Case-study spine. */
   problem: string;
   testStrategy: string;
@@ -70,8 +76,10 @@ export const projects: Project[] = [
       "APScheduler",
       "DeepEval",
     ],
+    problemShort:
+      "QA knowledge is scattered across test cases, automation code, JIRA tickets, requirements and meeting notes, making it difficult to find reliable, contextual answers without manually searching multiple sources.",
     built: [
-      "Hybrid search: semantic + keyword retrieval",
+      "Hybrid search combining semantic + keyword retrieval",
       "MCP interface for AI-assisted access to QA knowledge",
       "Citation-backed answers to reduce hallucination",
       "Scheduled ingestion with change detection",
@@ -113,6 +121,8 @@ export const projects: Project[] = [
       "Promptfoo",
       "Human-in-the-Loop design",
     ],
+    problemShort:
+      "Refinement stalls on stories that were never ready — missing acceptance criteria, ambiguous scope, no view of regression impact — so QA time goes into finding the gaps rather than judging the risk.",
     built: [
       "n8n-based QA refinement agent over JIRA stories",
       "Identifies missing acceptance criteria and test scenarios",
@@ -161,6 +171,8 @@ export const projects: Project[] = [
       "Parent-Document Retrieval",
       "RAGAS",
     ],
+    problemShort:
+      "With 5,000+ test cases, nobody can find what already exists, so suites accumulate duplicate coverage while real gaps go unnoticed.",
     built: [
       "RAG assistant over 5,000+ test cases",
       "HyDE-based query expansion",
@@ -199,6 +211,8 @@ export const projects: Project[] = [
     status: "Prototype",
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
+    problemShort:
+      "Judging an AI agent by its final answer misses wrong tool calls, unsafe parameters and policy violations — the response can look correct when the behavior underneath it wasn't.",
     built: [
       "Observes the actual agent execution path, not just the final answer",
       "Validates tool selection and tool parameters",

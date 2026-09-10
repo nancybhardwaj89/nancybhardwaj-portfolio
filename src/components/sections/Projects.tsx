@@ -2,6 +2,12 @@ import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { moreRepos, projects, type Project } from "@/content/projects";
 
+/** Shared styles for the labelled blocks on each card. */
+const blockLabel =
+  "font-mono text-[11px] tracking-wide text-fg-faint uppercase";
+const bullet =
+  "relative pl-4 text-sm leading-relaxed text-fg-muted before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-accent";
+
 /** The GitHub link for a project, if it has one. */
 function repoHref(project: Project) {
   return project.links.find((link) => link.href.includes("github.com"))?.href;
@@ -33,19 +39,24 @@ export function Projects() {
 
               <p className="mt-1.5 text-sm text-fg-faint">{project.subtitle}</p>
 
-              <p className="mt-4 text-sm leading-relaxed text-fg-muted">
-                {project.summary}
+              <h4 className={blockLabel}>Problem</h4>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+                {project.problemShort}
               </p>
 
-              <h4 className="mt-5 font-mono text-[11px] tracking-wide text-fg-faint uppercase">
-                What I built
-              </h4>
-              <ul className="mt-2.5 flex-1 space-y-1.5">
+              <h4 className={`${blockLabel} mt-5`}>What I built</h4>
+              <ul className="mt-2.5 space-y-1.5">
                 {project.built.map((item) => (
-                  <li
-                    key={item}
-                    className="relative pl-4 text-sm leading-relaxed text-fg-muted before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-accent"
-                  >
+                  <li key={item} className={bullet}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <h4 className={`${blockLabel} mt-5`}>Quality / evaluation</h4>
+              <ul className="mt-2.5 flex-1 space-y-1.5">
+                {project.evaluation.map((item) => (
+                  <li key={item} className={bullet}>
                     {item}
                   </li>
                 ))}
