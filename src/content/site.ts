@@ -114,5 +114,4 @@ export const stats = [
   { value: "70%", label: "Regression time cut" },
   { value: "15", label: "Engineers led" },
   { value: "6+", label: "AI agents built" },
-  { value: "∞", label: "Tests automated" },
 ] as const;
