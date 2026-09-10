@@ -122,16 +122,14 @@ export const projects: Project[] = [
       "Human-in-the-Loop design",
     ],
     problemShort:
-      "Refinement stalls on stories that were never ready — missing acceptance criteria, ambiguous scope, no view of regression impact — so QA time goes into finding the gaps rather than judging the risk.",
+      "Every sprint, QA teams repeatedly review and refine JIRA stories to identify gaps, clarify acceptance criteria and assess test readiness. This manual, repetitive process consumes valuable QA time and can still result in missed edge cases or inconsistent refinement outcomes.",
     built: [
       "n8n-based QA refinement agent over JIRA stories",
       "Identifies missing acceptance criteria and test scenarios",
       "Generates QA clarification questions",
       "Produces a readiness score and QA estimate",
-      "Slack review gate before anything reaches the ticket",
-      // Kept to what the CV states — Promptfoo covers four input classes.
-      // "Regression and hallucination testing" would overstate it.
-      "Promptfoo evaluation across well-defined, vague, invalid and missing stories",
+      "Posts assessment to Slack for human review",
+      "Creates a review gate before story progression",
     ],
     problem:
       "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no consideration of regression impact. The team's time goes into discovering that a story is underspecified rather than into the judgment calls only people can make.",
@@ -140,8 +138,9 @@ export const projects: Project[] = [
     approach:
       "An n8n workflow pulls story detail from JIRA and analyzes it from a QA angle, emitting structured output: a readiness score, the acceptance criteria that are absent, clarification questions worth asking, candidate test scenarios, likely regression impact and a QA estimate. Reports land in Slack for a QA engineer to review, and only reach JIRA as a comment once a person has approved them. The agent drafts; it does not decide.",
     evaluation: [
-      "Promptfoo evaluation across four input classes: well-defined, vague, invalid and missing stories",
-      "Response reliability and consistency — the failure mode being confident output on an empty story",
+      "Promptfoo evaluation across well-defined, vague, invalid and missing stories",
+      "Hallucination and output-format validation",
+      "Human-review guardrail for AI-generated assessments",
     ],
     result: null,
     learned:
@@ -172,16 +171,14 @@ export const projects: Project[] = [
       "RAGAS",
     ],
     problemShort:
-      "With 5,000+ test cases, nobody can find what already exists, so suites accumulate duplicate coverage while real gaps go unnoticed.",
+      "Large QA repositories contain valuable historical coverage, but finding relevant existing test cases manually is slow. Traditional keyword search can also miss semantically related scenarios and existing coverage.",
     built: [
       "RAG assistant over 5,000+ test cases",
       "HyDE-based query expansion",
-      // "Hybrid retrieval" belongs to QAVentra; this pipeline uses Mistral
-      // embeddings over ChromaDB, so it's described as it actually is.
-      "Mistral embeddings over ChromaDB",
+      "Semantic retrieval using embeddings",
       "NVIDIA reranking and contextual compression",
-      "Parent-document retrieval for full-case context",
-      "RAGAS evaluation across five metrics",
+      "Parent-document retrieval for complete test-case context",
+      "Answers questions about existing QA coverage",
     ],
     problem:
       "Large test suites accumulate duplicate coverage because nobody can find what already exists. With 5,000+ test cases, the practical question — does something already cover this flow, and where are the gaps — becomes unanswerable by search alone.",
@@ -190,7 +187,9 @@ export const projects: Project[] = [
     approach:
       "HyDE bridges the gap between how people phrase questions and how test cases are written, since the two share very little surface vocabulary. Retrieved candidates are reranked, then parent-document retrieval returns the full case rather than an isolated step, so the answer has enough context to be meaningful. Contextual compression trims retrieved material to what's relevant before it reaches the model, paired with grounded prompts — both aimed at the same failure mode of a fluent answer citing the wrong test case.",
     evaluation: [
-      "RAGAS across five metrics: Faithfulness, Answer Relevancy, Context Precision, Context Recall and Answer Correctness",
+      "RAGAS evaluation across five quality metrics",
+      "Retrieval and response-quality validation",
+      "Grounded-answer evaluation against retrieved test-case context",
     ],
     result: null,
     learned:
@@ -212,16 +211,13 @@ export const projects: Project[] = [
     primaryStack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     stack: ["React", "Vite", "Python", "FastAPI", "MCP"],
     problemShort:
-      "Judging an AI agent by its final answer misses wrong tool calls, unsafe parameters and policy violations — the response can look correct when the behavior underneath it wasn't.",
+      "A correct-looking response doesn't prove correct agent behavior. An AI agent can select the wrong tool, pass unsafe parameters or violate policy while still producing a seemingly valid final answer.",
     built: [
-      "Observes the actual agent execution path, not just the final answer",
+      "Observes the actual agent execution path, not just the final response",
       "Validates tool selection and tool parameters",
       "Detects policy violations and unauthorized actions",
       "Captures execution traces for investigation",
-      "Security scenarios: prompt injection, data access, privilege escalation",
-      // "UAT validation" isn't supported anywhere on the CV, so this stops at
-      // agent QA and security.
-      "Policy-driven risk and findings model for agent QA and security",
+      "Models agent QA and security risks",
     ],
     problem:
       "Testing an agent by reading its final answer misses almost everything that matters. An agent can return a perfectly reasonable reply having called the wrong tool, passed parameters it should never have had access to, or taken an execution path that violates policy. The response looks correct; the behavior underneath it was not.",
@@ -230,8 +226,11 @@ export const projects: Project[] = [
     approach:
       "A behavior validation framework covering tool selection, parameters, execution paths, policy compliance and risk, with security scenarios for prompt injection, unauthorized data access, privilege escalation and high-impact actions — an unauthorized refund being the concrete case. A policy-driven risk and findings model classifies observed behavior, flags security and business-rule violations, and produces actionable recommendations rather than a bare pass/fail, so the output is readable by someone deciding whether an agent is safe to ship.",
     evaluation: [
-      "Assertions on execution traces — tool selection, parameters and execution path",
-      "Policy compliance and risk classification per scenario",
+      "Tool-call and parameter validation",
+      "Policy compliance checks",
+      "Prompt injection and data-access scenarios",
+      "Privilege escalation testing",
+      "Execution-path analysis for high-risk actions",
     ],
     result: null,
     learned:
@@ -250,17 +249,48 @@ export function getProject(slug: string) {
 }
 
 /**
- * Secondary repositories worth surfacing without a full write-up.
- *
- * Deliberately short — this strip exists to show range, and every entry added
- * here dilutes the four featured projects above it.
+ * Projects presented as cards but without a detail page — same shape as the
+ * card view of a Project, so they render through the identical component.
  */
-export const moreRepos = [
+export interface RepoProject {
+  name: string;
+  subtitle: string;
+  problemShort: string;
+  built: string[];
+  evaluation: string[];
+  primaryStack: string[];
+  href: string;
+}
+
+export const moreRepos: RepoProject[] = [
   {
-    name: "AI Agent — IT Support Triage",
-    description:
-      "Human-in-the-loop multi-agent workflow for IT ticket triage, built in n8n.",
+    name: "AI IT Ticket Triage Agent",
+    subtitle: "Human-in-the-loop multi-agent workflow for IT ticket triage",
+    problemShort:
+      "IT support teams spend significant time manually classifying, prioritizing and routing incoming tickets. Automating these decisions without appropriate controls can also introduce risk when an AI system is uncertain or handling high-impact requests.",
+    built: [
+      "Multi-agent n8n workflow for automated IT ticket triage",
+      "LLM-based classification of category, severity, confidence and reasoning",
+      "Confidence- and severity-based routing between auto and human-review paths",
+      "Resolver agent that drafts responses for low-risk requests",
+      "Slack-based human approval for uncertain or high-severity tickets",
+      "End-to-end decision logging for auditability and traceability",
+    ],
+    evaluation: [
+      "Low-risk requests route to the auto-draft path",
+      "High-severity requests route to human review",
+      "Low-confidence requests route to human review",
+      "Invalid or non-JSON AI responses fail safely",
+      "Both automated and human escalation paths validated",
+    ],
+    primaryStack: [
+      "n8n",
+      "Groq",
+      "Multi-Agent",
+      "Slack",
+      "Google Sheets",
+      "Human-in-the-loop",
+    ],
     href: "https://github.com/nancybhardwaj89/AIAgent-IT-Support-Triage-multi-agent-n8n",
-    stack: ["n8n", "Multi-Agent", "Human-in-the-Loop"],
   },
 ];
