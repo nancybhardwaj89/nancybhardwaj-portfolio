@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { RecruiterView } from "./RecruiterView";
 import { Avatar } from "@/components/ui/Avatar";
 import { Container } from "@/components/ui/Container";
 import { navItems, site } from "@/content/site";
@@ -119,12 +120,14 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <RecruiterView className="hidden items-center rounded-full border border-accent-border bg-accent-subtle px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-accent-fg sm:inline-flex" />
+
             {githubHref ? (
               <a
                 href={githubHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden items-center gap-1.5 rounded-full border border-border bg-surface px-4 py-2 text-sm text-fg transition-colors hover:border-border-strong hover:bg-surface-raised sm:inline-flex"
+                className="hidden items-center gap-1.5 rounded-full border border-border bg-surface px-4 py-2 text-sm text-fg transition-colors hover:border-border-strong hover:bg-surface-raised lg:inline-flex"
               >
                 GitHub
                 <svg
@@ -178,6 +181,10 @@ export function Header() {
       >
         <Container>
           <nav aria-label="Mobile" className="flex flex-col py-2">
+            <RecruiterView
+              onNavigate={() => setMenuOpen(false)}
+              className="mb-1 rounded-md bg-accent-subtle px-2 py-3 text-left text-sm font-medium text-accent sm:hidden"
+            />
             {navItems.map((item) => (
               <a
                 key={item.id}

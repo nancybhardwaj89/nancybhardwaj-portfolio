@@ -136,6 +136,12 @@ html {
   pointer-events: none;
 }
 
+/* Native <dialog> relies on auto margins to centre itself; Tailwind's reset
+   zeroes them, which pins the modal to the top-left corner. */
+dialog {
+  margin: auto;
+}
+
 /* ---------------------------------------------------------------------------
    Alternating section backgrounds.
 
