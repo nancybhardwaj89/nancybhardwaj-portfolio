@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
+import { aboutParagraphs } from "@/content/about";
 import {
   awards,
   certifications,
@@ -14,35 +15,9 @@ export function About() {
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14">
         <Reveal>
           <div className="space-y-5 text-base leading-relaxed text-fg-muted">
-            <p>
-              I&apos;ve spent fourteen years in quality engineering, starting as
-              a manual tester in a Waterfall shop and working through to
-              architecting automation frameworks and leading distributed teams
-              of up to fifteen engineers.
-            </p>
-            <p>
-              What holds my attention now is a harder version of the original
-              problem. Testing deterministic software is a solved discipline —
-              you assert on an output and it either matches or it doesn&apos;t.
-              AI systems don&apos;t work that way. A model can return a fluent,
-              confident answer that cites the wrong source, or an agent can
-              produce a reasonable reply having called a tool it should never
-              have had access to. The interesting question is what
-              &ldquo;correct&rdquo; even means, and how you measure it
-              repeatably.
-            </p>
-            <p>
-              That&apos;s where most of my recent work sits: RAG evaluation with
-              RAGAS and DeepEval, agent behavior validation, AI red teaming,
-              and Salesforce Agentforce testing — plus building the tooling to
-              do it, because much of it doesn&apos;t exist off the shelf yet.
-              The Playwright and API automation underneath hasn&apos;t gone
-              anywhere; it&apos;s the foundation the rest is built on.
-            </p>
-            <p>
-              Outside delivery, I speak at organization-wide sessions, write
-              about automation and Playwright, and mentor junior engineers.
-            </p>
+            {aboutParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </Reveal>
 
