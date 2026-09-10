@@ -8,7 +8,7 @@ export function Skills() {
     <Section
       id="skills"
       title="The stack behind the testing"
-      lead="Grouped by what it's for, not alphabetized. The AI-quality work leads because that's where the newest problems are."
+      lead="The tools and technologies I use to build, automate, evaluate, and secure modern software and AI systems."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {skillGroups.map((group, index) => (
