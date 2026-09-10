@@ -75,7 +75,7 @@ export const projects: Project[] = [
     context: "Client engagement",
     category: "RAG systems",
     name: "QAVentra",
-    subtitle: "Self-hosted hybrid RAG knowledge platform for QA teams",
+    subtitle: "QA Knowledge Intelligence Platform",
     summary:
       "A single, cited knowledge base over test cases, automation code, JIRA tickets, requirements and meeting notes — searchable by humans and by AI tools through MCP.",
     primaryStack: ["Python", "FastAPI", "Qdrant", "MCP", "DeepEval"],
@@ -94,13 +94,14 @@ export const projects: Project[] = [
       "DeepEval",
     ],
     problemShort:
-      "QA knowledge is scattered across test cases, automation code, JIRA tickets, requirements and meeting notes, making it difficult to find reliable, contextual answers without manually searching multiple sources.",
+      "QA knowledge is scattered across test cases, automation code, JIRA tickets, requirements, and meeting notes, making it difficult to find reliable answers quickly.",
     built: [
-      "Hybrid search combining semantic + keyword retrieval",
-      "MCP interface for AI-assisted access to QA knowledge",
-      "Citation-backed answers to reduce hallucination",
-      "Scheduled ingestion with change detection",
-      "Self-hosted architecture for controlled data access",
+      "Unified QA knowledge using hybrid search",
+      "Semantic + keyword retrieval",
+      "MCP interface for AI-assisted access",
+      "Citation-backed responses",
+      "Change-aware knowledge ingestion",
+      "Retrieval and response evaluation",
     ],
     problem:
       "QA knowledge is scattered by default — test cases in one tool, tickets in another, requirements in a third, and the reasoning behind past decisions buried in meeting notes. The answer to “what did we already test here, and why” usually exists, but finding it means knowing where to look. A retrieval system over that content introduces a second problem: it can answer fluently and confidently while citing the wrong source.",
@@ -108,13 +109,10 @@ export const projects: Project[] = [
       "Treat retrieval and generation as separately testable stages. A wrong answer has two very different causes — the right material was never retrieved, or it was retrieved and then misrepresented — and conflating them makes failures undiagnosable. Retrieval is measured on whether the correct chunks surfaced; generation is measured on whether the answer is faithful to what was retrieved and whether the citations shown actually support the claims made.",
     approach:
       "Hybrid search combining lexical and dense retrieval, with a cross-encoder reranking the results. QA and defect queries hinge on precise identifiers and error strings that pure semantic search handles poorly, so lexical matching earns its place alongside embeddings. Scheduled ingestion with change detection keeps the knowledge base current without anyone remembering to re-index. The whole platform is packaged with Docker Compose and exposed over MCP, so AI tooling and a web chat interface query the same source — self-hosted throughout, because test cases and tickets are exactly the material that cannot be sent to a third-party service.",
-    evaluation: [
-      "DeepEval for answer relevance and faithfulness",
-      "Contextual precision and recall on retrieved chunks",
-      "Citation accuracy — whether the sources shown actually support the answer",
-    ],
-    // Sourced from the running system's own UI (QAVentra-ProofImages).
+    evaluation: [],
     result: [
+      "Makes QA knowledge searchable, contextual, and accessible to both humans and AI tools",
+      // Read off the running system's own UI (QAVentra-ProofImages).
       "163 artifacts indexed across test cases, automation code, JIRA tickets and requirements",
     ],
     learned:
@@ -131,7 +129,7 @@ export const projects: Project[] = [
     context: "Client engagement",
     category: "AI agents",
     name: "SprintReadyAI",
-    subtitle: "QA refinement copilot",
+    subtitle: "QA Refinement Copilot",
     summary:
       "An n8n agent that reads a JIRA story, analyzes it from a QA perspective, and posts a readiness assessment to Slack for human review before anything reaches the ticket.",
     primaryStack: ["n8n", "OpenAI", "JIRA", "Slack", "Promptfoo"],
@@ -144,14 +142,15 @@ export const projects: Project[] = [
       "Human-in-the-Loop design",
     ],
     problemShort:
-      "Every sprint, QA teams repeatedly review and refine JIRA stories to identify gaps, clarify acceptance criteria and assess test readiness. This manual, repetitive process consumes valuable QA time and can still result in missed edge cases or inconsistent refinement outcomes.",
+      "Every sprint, QA teams spend significant time repeatedly reviewing and refining JIRA stories. The work is repetitive and can still result in missed edge cases or inconsistent readiness decisions.",
     built: [
-      "n8n-based QA refinement agent over JIRA stories",
-      "Identifies missing acceptance criteria and test scenarios",
+      "AI agent for JIRA story analysis",
+      "Detects missing acceptance criteria",
       "Generates QA clarification questions",
-      "Produces a readiness score and QA estimate",
-      "Posts assessment to Slack for human review",
-      "Creates a review gate before story progression",
+      "Suggests functional, negative and edge scenarios",
+      "Produces readiness score and QA estimate",
+      "Human review through Slack",
+      "Promptfoo evaluation for different story types",
     ],
     problem:
       "Refinement sessions stall on stories that were never ready to be refined — missing acceptance criteria, ambiguous scope, no consideration of regression impact. The team's time goes into discovering that a story is underspecified rather than into the judgment calls only people can make.",
@@ -159,16 +158,12 @@ export const projects: Project[] = [
       "The failure mode for this agent isn't a crash, it's confident output on a story with nothing in it. A story that says three words should produce an assessment saying so, not a plausible-looking set of invented test scenarios. So the test suite is organized by input quality rather than by feature: well-defined, vague, invalid and missing stories each get their own expectations.",
     approach:
       "An n8n workflow pulls story detail from JIRA and analyzes it from a QA angle, emitting structured output: a readiness score, the acceptance criteria that are absent, clarification questions worth asking, candidate test scenarios, likely regression impact and a QA estimate. Reports land in Slack for a QA engineer to review, and only reach JIRA as a comment once a person has approved them. The agent drafts; it does not decide.",
-    evaluation: [
-      "Promptfoo evaluation across well-defined, vague, invalid and missing stories",
-      "Hallucination and output-format validation",
-      "Human-review guardrail for AI-generated assessments",
-    ],
-    // Counted directly from eval_promptfoo/promptfooconfig.yaml in the repo:
-    // 10 `- description:` cases, 23 `- type:` assertions.
+    evaluation: [],
     result: [
-      "10-case Promptfoo regression suite with 23 assertions",
-      "Covers readiness banding, verdict consistency on repeat runs, prompt injection, jailbreak, credential leakage and toxicity refusal",
+      "Reduces repetitive QA refinement effort while creating a more consistent readiness assessment",
+      // Counted directly from eval_promptfoo/promptfooconfig.yaml in the repo:
+      // 10 `- description:` cases, 23 `- type:` assertions.
+      "10-case Promptfoo suite with 23 assertions, covering readiness banding, verdict consistency, prompt injection, jailbreak, credential leakage and toxicity refusal",
     ],
     learned:
       "The human-in-the-loop gate turned out to be the feature, not a safety compromise around it. An agent writing straight into the team's backlog is a trust problem before it is a productivity gain, and putting a review step in front of the write is what made it something colleagues would actually turn on. Testing by input quality rather than by function also surfaced far more than a happy-path suite would have.",
@@ -184,7 +179,7 @@ export const projects: Project[] = [
     context: "Client engagement",
     category: "RAG systems",
     name: "TestCase Compass",
-    subtitle: "Advanced RAG pipeline over a test-case corpus",
+    subtitle: "Advanced RAG Assistant for Test Cases",
     summary:
       "A retrieval assistant over 5,000+ test cases, using HyDE, reranking and parent-document retrieval to answer what coverage already exists.",
     primaryStack: ["LangFlow", "ChromaDB", "Groq", "HyDE", "RAGAS"],
@@ -200,14 +195,15 @@ export const projects: Project[] = [
       "RAGAS",
     ],
     problemShort:
-      "Large QA repositories contain valuable historical coverage, but finding relevant existing test cases manually is slow. Traditional keyword search can also miss semantically related scenarios and existing coverage.",
+      "Finding relevant coverage across thousands of existing test cases can be time-consuming and often depends on manual searching.",
     built: [
       "RAG assistant over 5,000+ test cases",
       "HyDE-based query expansion",
-      "Semantic retrieval using embeddings",
-      "NVIDIA reranking and contextual compression",
-      "Parent-document retrieval for complete test-case context",
-      "Answers questions about existing QA coverage",
+      "Semantic retrieval",
+      "NVIDIA reranking",
+      "Contextual compression",
+      "Parent-document retrieval",
+      "RAGAS evaluation",
     ],
     problem:
       "Large test suites accumulate duplicate coverage because nobody can find what already exists. With 5,000+ test cases, the practical question — does something already cover this flow, and where are the gaps — becomes unanswerable by search alone.",
@@ -215,14 +211,12 @@ export const projects: Project[] = [
       "Measure retrieval quality and answer quality as separate concerns, using RAGAS across five metrics. A test-case corpus is a hostile case for naive retrieval: the documents are short, formulaic and highly similar to one another, so an embedding search will happily return five near-identical cases that are all slightly wrong. Context precision and recall catch that in a way answer-level scoring alone does not.",
     approach:
       "HyDE bridges the gap between how people phrase questions and how test cases are written, since the two share very little surface vocabulary. Retrieved candidates are reranked, then parent-document retrieval returns the full case rather than an isolated step, so the answer has enough context to be meaningful. Contextual compression trims retrieved material to what's relevant before it reaches the model, paired with grounded prompts — both aimed at the same failure mode of a fluent answer citing the wrong test case.",
-    evaluation: [
-      "RAGAS evaluation across five quality metrics",
-      "Retrieval and response-quality validation",
-      "Grounded-answer evaluation against retrieved test-case context",
-    ],
+    evaluation: [],
     result: [
+      "Helps QA teams discover existing test coverage faster using advanced retrieval",
+      // Means computed from results/ragas_results.csv; sample size stated
+      // inline because the run is small.
       "RAGAS over a 10-question evaluation set: answer relevancy 0.85, faithfulness 0.80",
-      "Indexed and queried a corpus of 5,000+ test cases",
     ],
     learned:
       "Corpus shape drives pipeline design more than model choice does. A homogeneous corpus of short, near-identical documents defeats the default RAG recipe, and the fixes that mattered — HyDE, reranking, parent-document retrieval — were all about compensating for that shape rather than about the LLM at the end of the chain.",

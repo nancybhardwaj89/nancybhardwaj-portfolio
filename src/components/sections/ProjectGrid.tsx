@@ -66,16 +66,18 @@ function Card({ card, wide = false }: { card: ProjectCard; wide?: boolean }) {
           </ul>
         </div>
 
-        <div className={wide ? undefined : "mt-5"}>
-          <h4 className={blockLabel}>Quality / evaluation</h4>
-          <ul className="mt-2.5 space-y-1.5">
-            {card.evaluation.map((item) => (
-              <li key={item} className={bullet}>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {card.evaluation.length > 0 ? (
+          <div className={wide ? undefined : "mt-5"}>
+            <h4 className={blockLabel}>Quality / evaluation</h4>
+            <ul className="mt-2.5 space-y-1.5">
+              {card.evaluation.map((item) => (
+                <li key={item} className={bullet}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
 
       {/* Results carry accent weight — for a hiring manager this is the block
@@ -83,7 +85,7 @@ function Card({ card, wide = false }: { card: ProjectCard; wide?: boolean }) {
           empty "Result" heading would advertise the gap. */}
       {card.result.length > 0 ? (
         <div className="mt-5 rounded-xl border border-accent-border bg-accent-subtle p-4">
-          <h4 className={blockLabel}>Result</h4>
+          <h4 className={blockLabel}>Impact</h4>
           <ul className="mt-2.5 space-y-1.5">
             {card.result.map((item) => (
               <li
