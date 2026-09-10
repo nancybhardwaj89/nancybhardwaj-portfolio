@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { moreRepos, projects, type Project } from "@/content/projects";
@@ -63,7 +62,7 @@ export function Projects() {
                 ))}
               </ul>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border pt-5">
+              <div className="mt-6 border-t border-border pt-5">
                 {repoHref(project) ? (
                   <a
                     href={repoHref(project)}
@@ -86,27 +85,6 @@ export function Projects() {
                     </svg>
                   </a>
                 ) : null}
-
-                {/* Kept for readers who do want the full write-up — problem,
-                    test strategy, evaluation and what was learned. */}
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="group inline-flex items-center gap-1.5 font-mono text-xs text-fg-muted transition-colors hover:text-fg"
-                >
-                  Full case study
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                  >
-                    <path d="M3 8h10M9 4l4 4-4 4" />
-                  </svg>
-                </Link>
               </div>
             </div>
           </Reveal>
