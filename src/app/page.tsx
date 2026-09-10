@@ -2,7 +2,6 @@ import { Hero } from "@/components/sections/Hero";
 import { Architecture } from "@/components/sections/Architecture";
 import { Pyramid } from "@/components/sections/Pyramid";
 import { Skills } from "@/components/sections/Skills";
-import { QualitySignals } from "@/components/sections/QualitySignals";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { About } from "@/components/sections/About";
@@ -14,7 +13,6 @@ export default function Home() {
       <Hero />
       <Architecture />
       <Pyramid />
-      <QualitySignals />
       <Skills />
       <Projects />
       <Experience />
