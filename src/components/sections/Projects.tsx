@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { moreRepos, projects } from "@/content/projects";
-import { site } from "@/content/site";
 
 export function Projects() {
   return (
@@ -64,70 +63,61 @@ export function Projects() {
             </Link>
           </Reveal>
         ))}
-      </div>
 
-      {/* Secondary repositories — one row, not a second grid, so the featured
-          four keep their weight. */}
-      <Reveal delay={80}>
-        <div className="mt-10 border-t border-border pt-8">
-          <h3 className="font-mono text-xs tracking-wide text-fg-faint">
-            ALSO ON GITHUB
-          </h3>
-
-          <ul className="mt-4 space-y-3">
-            {moreRepos.map((repo) => (
-              <li key={repo.href}>
-                <a
-                  href={repo.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col gap-2 rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-accent-border sm:flex-row sm:items-center sm:justify-between sm:gap-6"
-                >
-                  <div className="min-w-0">
-                    <p className="font-display text-base font-semibold tracking-tight text-fg transition-colors group-hover:text-accent">
-                      {repo.name}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-fg-muted">
-                      {repo.description}
-                    </p>
-                  </div>
-                  <ul className="flex shrink-0 flex-wrap gap-1.5">
-                    {repo.stack.map((tech) => (
-                      <li
-                        key={tech}
-                        className="rounded-md border border-border bg-surface-raised px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
-                      >
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <a
-            href={site.socials.find((s) => s.icon === "github")?.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-accent transition-colors hover:text-accent-hover"
-          >
-            All repositories
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="h-3 w-3"
+        {/* Repositories without a full write-up sit in the same grid, marked
+            as external so it's clear they lead to source rather than to a
+            case study. */}
+        {moreRepos.map((repo, index) => (
+          <Reveal key={repo.href} delay={Math.min(projects.length + index, 4) * 60}>
+            <a
+              href={repo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex h-full flex-col rounded-2xl border border-dashed border-border bg-surface p-6 transition-colors duration-200 hover:border-accent-border"
             >
-              <path d="M5.5 10.5 10.5 5.5M6 5.5h4.5V10" />
-            </svg>
-          </a>
-        </div>
-      </Reveal>
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-display text-xl font-semibold tracking-tight text-fg transition-colors group-hover:text-accent">
+                  {repo.name}
+                </h3>
+                <span className="shrink-0 rounded-md border border-border px-2 py-1 font-mono text-[11px] leading-none text-fg-faint">
+                  Repo
+                </span>
+              </div>
+
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-fg-muted">
+                {repo.description}
+              </p>
+
+              <ul className="mt-5 flex flex-wrap gap-1.5">
+                {repo.stack.map((tech) => (
+                  <li
+                    key={tech}
+                    className="rounded-md border border-border bg-surface-raised px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+
+              <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs text-accent">
+                View on GitHub
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                >
+                  <path d="M5.5 10.5 10.5 5.5M6 5.5h4.5V10" />
+                </svg>
+              </span>
+            </a>
+          </Reveal>
+        ))}
+      </div>
     </Section>
   );
 }
