@@ -17,7 +17,7 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
   {
     title: "AI-Augmented QA & Agentic Automation",
-    note: "Designing and orchestrating agents, and the retrieval systems behind them.",
+    note: "Building AI-powered QA workflows, agents, and intelligent automation.",
     items: [
       "AI Agent Design & Orchestration",
       "Multi-Agent Systems",
@@ -33,7 +33,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "GenAI / LLM Evaluation & Responsible AI",
-    note: "Measuring whether a model's answers are actually grounded — not just plausible.",
+    note: "Evaluating AI for accuracy, groundedness, safety, and reliability.",
     items: [
       "RAGAS",
       "DeepEval",
@@ -47,7 +47,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Salesforce Quality Engineering",
-    note: "Including Agentforce, where conversational agents need a different test model entirely.",
+    note: "Testing Salesforce applications and AI agents across business-critical workflows.",
     items: [
       "Agentforce Testing Center",
       "Topics, Actions & Utterances",
@@ -61,7 +61,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Test Automation & Programming",
-    note: "Framework architecture, not just script authoring.",
+    note: "Engineering scalable automation frameworks, not just test scripts.",
     items: [
       "Playwright (TypeScript)",
       "Playwright MCP",
@@ -74,7 +74,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "API & Performance Testing",
-    note: "Contract-level confidence before the UI is even involved.",
+    note: "Validating APIs, integrations, and performance before failures reach users.",
     items: [
       "REST API Testing",
       "Postman",
@@ -85,7 +85,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "CI/CD, Reporting & Test Management",
-    note: "Making test results visible to people who don't run tests.",
+    note: "Turning testing into a visible, measurable part of the delivery pipeline.",
     items: [
       "GitHub Actions",
       "Jenkins",
