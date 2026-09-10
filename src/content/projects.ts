@@ -112,8 +112,6 @@ export const projects: Project[] = [
     evaluation: [],
     result: [
       "Makes QA knowledge searchable, contextual, and accessible to both humans and AI tools",
-      // Read off the running system's own UI (QAVentra-ProofImages).
-      "163 artifacts indexed across test cases, automation code, JIRA tickets and requirements",
     ],
     learned:
       "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimization, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
@@ -214,9 +212,6 @@ export const projects: Project[] = [
     evaluation: [],
     result: [
       "Helps QA teams discover existing test coverage faster using advanced retrieval",
-      // Means computed from results/ragas_results.csv; sample size stated
-      // inline because the run is small.
-      "RAGAS over a 10-question evaluation set: answer relevancy 0.85, faithfulness 0.80",
     ],
     learned:
       "Corpus shape drives pipeline design more than model choice does. A homogeneous corpus of short, near-identical documents defeats the default RAG recipe, and the fixes that mattered — HyDE, reranking, parent-document retrieval — were all about compensating for that shape rather than about the LLM at the end of the chain.",
