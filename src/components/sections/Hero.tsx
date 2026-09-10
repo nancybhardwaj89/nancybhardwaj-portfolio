@@ -19,7 +19,7 @@ const pillOutline = `${pill} border border-border bg-surface text-fg hover:borde
  */
 function IdentityCard() {
   return (
-    <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
+    <div className="depth-raised rounded-2xl border border-border bg-surface p-5 sm:p-6">
       <div className="flex items-center gap-4">
         <div className="shrink-0 rounded-full p-[3px] ring-2 ring-accent">
           <Avatar
@@ -197,7 +197,7 @@ export function Hero() {
                 <dt className="mt-2 text-sm leading-snug text-fg-muted">
                   {stat.label}
                 </dt>
-                <dd className="font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl">
+                <dd className="depth-text font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl">
                   {stat.value}
                 </dd>
               </div>

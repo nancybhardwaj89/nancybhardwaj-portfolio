@@ -47,7 +47,7 @@ const cards: ProjectCard[] = [
 
 function Card({ card }: { card: ProjectCard }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6">
+    <div className="depth-card flex h-full flex-col rounded-2xl border border-border bg-surface p-6 hover:border-accent-border">
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-display text-xl font-semibold tracking-tight text-fg">
           {card.name}

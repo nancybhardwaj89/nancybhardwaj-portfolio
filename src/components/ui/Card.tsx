@@ -16,7 +16,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border bg-surface p-6",
+        "depth-card rounded-2xl border border-border bg-surface p-6",
         interactive &&
           "transition-colors duration-200 hover:border-accent-border hover:bg-surface-raised",
         className,

@@ -136,6 +136,73 @@ html {
   pointer-events: none;
 }
 
+/* ---------------------------------------------------------------------------
+   Depth.
+
+   All of this is CSS — no 3D library, no added bytes. A WebGL hero would have
+   roughly doubled the JS payload for an effect most visitors see for two
+   seconds on a phone.
+   --------------------------------------------------------------------------- */
+
+/* Cards lift and tilt very slightly toward the viewer on hover. The rotation
+   is deliberately small: past about 2deg it reads as a gimmick rather than as
+   depth, and text starts to blur on lower-DPI screens. */
+.depth-card {
+  transform-style: preserve-3d;
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms ease;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .depth-card:hover {
+    transform: translateY(-4px) perspective(900px) rotateX(1.4deg);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 8px 24px -8px rgba(0, 0, 0, 0.12),
+      0 24px 48px -24px rgba(0, 0, 0, 0.18);
+  }
+
+  :root:not([data-theme="light"]) .depth-card:hover,
+  .dark .depth-card:hover {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 8px 24px -8px rgba(0, 0, 0, 0.55),
+      0 24px 48px -24px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* The hero identity card sits slightly forward of the page at rest. */
+.depth-raised {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 12px 32px -12px rgba(0, 0, 0, 0.14),
+    0 32px 64px -32px rgba(0, 0, 0, 0.2);
+}
+
+.dark .depth-raised {
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 12px 32px -12px rgba(0, 0, 0, 0.6),
+    0 32px 64px -32px rgba(0, 0, 0, 0.9);
+}
+
+/* Stat numerals get a faint cast so they read as sitting on the grid rather
+   than in it. Subtle enough to be felt more than seen. */
+.depth-text {
+  text-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-card,
+  .depth-card:hover {
+    transform: none;
+    transition: box-shadow 200ms ease, border-color 200ms ease;
+  }
+}
+
 /* Native <dialog> relies on auto margins to centre itself; Tailwind's reset
    zeroes them, which pins the modal to the top-left corner. */
 dialog {
