@@ -127,7 +127,7 @@ export const projects: Project[] = [
   {
     slug: "sprintreadyai",
     context: "Client engagement",
-    category: "AI agents",
+    category: "AI Agents",
     name: "SprintReadyAI",
     subtitle: "QA Refinement Copilot",
     summary:
@@ -229,7 +229,7 @@ export const projects: Project[] = [
   },
   {
     slug: "assertpilot",
-    category: "Agent QA & security",
+    category: "Agent QA & Security",
     name: "AssertPilot",
     subtitle: "AI Agent QA & Security Observatory",
     summary:
@@ -290,7 +290,7 @@ export interface RepoProject {
 export const moreRepos: RepoProject[] = [
   {
     name: "AI IT Support Triage",
-    category: "AI agents",
+    category: "AI Agents",
     subtitle: "Human-in-the-Loop Multi-Agent Workflow",
     problemShort:
       "IT support teams spend time manually classifying, prioritizing, and routing incoming tickets.",
