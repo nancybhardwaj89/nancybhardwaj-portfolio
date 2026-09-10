@@ -9,7 +9,7 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      title="Case studies"
+      title="Projects & Case Studies"
       lead="Enterprise delivery, and the AI systems I've built to explore how we can test, evaluate, and trust AI behavior beyond the final response."
     >
       <ProjectGrid />
