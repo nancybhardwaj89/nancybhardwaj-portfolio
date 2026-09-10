@@ -39,7 +39,7 @@ export function Projects() {
 
               <p className="mt-1.5 text-sm text-fg-faint">{project.subtitle}</p>
 
-              <h4 className={blockLabel}>Problem</h4>
+              <h4 className={`${blockLabel} mt-5`}>Problem</h4>
               <p className="mt-2 text-sm leading-relaxed text-fg-muted">
                 {project.problemShort}
               </p>
