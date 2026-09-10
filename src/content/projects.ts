@@ -46,8 +46,24 @@ export interface Project {
   approach: string;
   /** The specific metrics or checks applied. */
   evaluation: string[];
-  /** TODO(nancy): a real, defensible metric. */
-  result: string | null;
+
+  /**
+   * Measured outcomes, shown on the card. Rendered only when non-empty.
+   *
+   * TODO(nancy): still empty for every project. Nothing goes in here that
+   * isn't a figure you can defend in an interview — see the note in chat
+   * about the RAGAS run found in TestCaseCompass/results/ragas_results.csv.
+   */
+  result: string[];
+
+  /** Screenshot or architecture diagram, as a path under /public. */
+  media?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    caption: string;
+  };
   /** DRAFT — see sourcing rules above. */
   learned: string | null;
 
@@ -96,7 +112,14 @@ export const projects: Project[] = [
       "Contextual precision and recall on retrieved chunks",
       "Citation accuracy — whether the sources shown actually support the answer",
     ],
-    result: null,
+    result: [],
+    media: {
+      src: "/projects/qaventra.png",
+      alt: "QAVentra interface: a search box over the QA knowledge base with quick actions for test coverage, defect tracing and PRD analysis.",
+      width: 1400,
+      height: 661,
+      caption: "The assistant, grounded in a synced QA knowledge base.",
+    },
     learned:
       "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimization, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
     links: [
@@ -142,7 +165,7 @@ export const projects: Project[] = [
       "Hallucination and output-format validation",
       "Human-review guardrail for AI-generated assessments",
     ],
-    result: null,
+    result: [],
     learned:
       "The human-in-the-loop gate turned out to be the feature, not a safety compromise around it. An agent writing straight into the team's backlog is a trust problem before it is a productivity gain, and putting a review step in front of the write is what made it something colleagues would actually turn on. Testing by input quality rather than by function also surfaced far more than a happy-path suite would have.",
     links: [
@@ -191,7 +214,14 @@ export const projects: Project[] = [
       "Retrieval and response-quality validation",
       "Grounded-answer evaluation against retrieved test-case context",
     ],
-    result: null,
+    result: [],
+    media: {
+      src: "/projects/testcase-compass.png",
+      alt: "The TestCase Compass LangFlow pipeline: ingestion and chunking into ChromaDB, then HyDE query expansion, NVIDIA reranking, contextual compression and parent-document retrieval feeding a Groq model.",
+      width: 1400,
+      height: 718,
+      caption: "The full retrieval pipeline, from ingestion to grounded answer.",
+    },
     learned:
       "Corpus shape drives pipeline design more than model choice does. A homogeneous corpus of short, near-identical documents defeats the default RAG recipe, and the fixes that mattered — HyDE, reranking, parent-document retrieval — were all about compensating for that shape rather than about the LLM at the end of the chain.",
     links: [
@@ -231,7 +261,7 @@ export const projects: Project[] = [
       "Privilege escalation testing",
       "Execution-path analysis for high-risk actions",
     ],
-    result: null,
+    result: [],
     learned:
       "Testing an agent has more in common with security testing than with functional testing. The useful frame turned out to be abuse cases — what could this agent be made to do — rather than acceptance criteria, and the questions that mattered were the ones any security-minded tester would already ask of an API with privileged access.",
     links: [

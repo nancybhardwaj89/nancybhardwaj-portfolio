@@ -14,8 +14,16 @@ interface ProjectCard {
   problemShort: string;
   built: string[];
   evaluation: string[];
+  result: string[];
   primaryStack: string[];
   href?: string;
+  media?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    caption: string;
+  };
 }
 
 const blockLabel =
@@ -31,7 +39,9 @@ const cards: ProjectCard[] = [
     problemShort: project.problemShort,
     built: project.built,
     evaluation: project.evaluation,
+    result: project.result,
     primaryStack: project.primaryStack,
+    media: project.media,
     href: project.links.find((link) => link.href.includes("github.com"))?.href,
   })),
   ...moreRepos.map((repo) => ({
@@ -40,6 +50,7 @@ const cards: ProjectCard[] = [
     problemShort: repo.problemShort,
     built: repo.built,
     evaluation: repo.evaluation,
+    result: [],
     primaryStack: repo.primaryStack,
     href: repo.href,
   })),
@@ -60,6 +71,35 @@ function Card({ card, wide = false }: { card: ProjectCard; wide?: boolean }) {
       </div>
 
       <p className="mt-1.5 text-sm text-fg-faint">{card.subtitle}</p>
+
+      {card.media ? (
+        <figure className="mt-5">
+          <a
+            href={card.media.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block overflow-hidden rounded-lg border border-border bg-surface-raised"
+          >
+            {/* Plain img with explicit dimensions: the site is a static export
+                with the optimizer disabled, so next/image would issue the same
+                request while adding config. The ratio box prevents layout
+                shift as it loads. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={card.media.src}
+              alt={card.media.alt}
+              width={card.media.width}
+              height={card.media.height}
+              loading="lazy"
+              decoding="async"
+              className="block h-auto w-full"
+            />
+          </a>
+          <figcaption className="mt-2 text-xs text-fg-faint">
+            {card.media.caption}
+          </figcaption>
+        </figure>
+      ) : null}
 
       <h4 className={`${blockLabel} mt-5`}>Problem</h4>
       <p
@@ -103,6 +143,25 @@ function Card({ card, wide = false }: { card: ProjectCard; wide?: boolean }) {
           </ul>
         </div>
       </div>
+
+      {/* Results carry accent weight — for a hiring manager this is the block
+          that matters most. Rendered only when there are real figures; an
+          empty "Result" heading would advertise the gap. */}
+      {card.result.length > 0 ? (
+        <div className="mt-5 rounded-xl border border-accent-border bg-accent-subtle p-4">
+          <h4 className={blockLabel}>Result</h4>
+          <ul className="mt-2.5 space-y-1.5">
+            {card.result.map((item) => (
+              <li
+                key={item}
+                className="relative pl-4 text-sm leading-relaxed font-medium text-fg before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-accent"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <ul className="mt-5 flex flex-wrap gap-1.5">
         {card.primaryStack.map((tech) => (
