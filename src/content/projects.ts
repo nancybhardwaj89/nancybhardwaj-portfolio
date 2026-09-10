@@ -28,6 +28,8 @@ export interface Project {
   /** One-sentence hook for the home-page card. */
   summary: string;
   status?: string;
+  /** Filter group shown in the case studies section. */
+  category: string;
   /** Shown on the card; the 4–5 most recognizable. */
   primaryStack: string[];
   /** Full technology list for the detail page sidebar. */
@@ -68,6 +70,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "qaventra",
+    category: "RAG systems",
     name: "QAVentra",
     subtitle: "Self-hosted hybrid RAG knowledge platform for QA teams",
     summary:
@@ -122,6 +125,7 @@ export const projects: Project[] = [
   },
   {
     slug: "sprintreadyai",
+    category: "AI agents",
     name: "SprintReadyAI",
     subtitle: "QA refinement copilot",
     summary:
@@ -173,6 +177,7 @@ export const projects: Project[] = [
   },
   {
     slug: "testcase-compass",
+    category: "RAG systems",
     name: "TestCase Compass",
     subtitle: "Advanced RAG pipeline over a test-case corpus",
     summary:
@@ -225,6 +230,7 @@ export const projects: Project[] = [
   },
   {
     slug: "assertpilot",
+    category: "Agent QA & security",
     name: "AssertPilot",
     subtitle: "AI agent QA and security observatory",
     summary:
@@ -276,6 +282,7 @@ export function getProject(slug: string) {
 export interface RepoProject {
   name: string;
   subtitle: string;
+  category: string;
   problemShort: string;
   built: string[];
   evaluation: string[];
@@ -286,6 +293,7 @@ export interface RepoProject {
 export const moreRepos: RepoProject[] = [
   {
     name: "AI IT Ticket Triage Agent",
+    category: "AI agents",
     subtitle: "Human-in-the-loop multi-agent workflow for IT ticket triage",
     problemShort:
       "IT support teams spend significant time manually classifying, prioritizing and routing incoming tickets. Automating these decisions without appropriate controls can also introduce risk when an AI system is uncertain or handling high-impact requests.",

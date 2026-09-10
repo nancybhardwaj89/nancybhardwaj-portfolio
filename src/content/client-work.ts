@@ -20,6 +20,8 @@ export interface ClientProject {
   subtitle: string;
   /** Small tag distinguishing this from the personal projects. */
   context: string;
+  /** Filter group shown in the case studies section. */
+  category: string;
   problemShort: string;
   built: string[];
   evaluation: string[];
@@ -32,6 +34,7 @@ export const clientWork: ClientProject[] = [
     name: "Enterprise automation framework & CI/CD",
     subtitle: "Playwright + TypeScript framework for enterprise regression",
     context: "Client engagement",
+    category: "Client work",
     problemShort:
       "Regression cycles were long enough to gate releases, and a distributed team of up to 15 engineers across multiple time zones needed a framework they could all extend without it fragmenting.",
     built: [
@@ -60,6 +63,7 @@ export const clientWork: ClientProject[] = [
     name: "Salesforce Agentforce agent testing",
     subtitle: "Utterance-based test suites for a conversational AI deployment",
     context: "Client engagement",
+    category: "Client work",
     problemShort:
       "An Agentforce agent classifies each user utterance into a topic, then executes an action sequence. When classification is wrong the agent does not error — it confidently performs the wrong action, so misrouting reaches production looking like ordinary behavior.",
     built: [
