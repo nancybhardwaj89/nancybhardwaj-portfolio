@@ -8,8 +8,14 @@
  * SOURCING RULES:
  *  - `problem`, `testStrategy`, `approach`, `evaluation` and `stack` are
  *    rephrasings of CV bullets. Nothing invented.
- *  - `result` is null on every project because the CV states no measurable
- *    outcome for any of them. Numbers must come from Nancy, not from here.
+ *  - `result` holds only figures traced to an artefact in Nancy's own repos
+ *    or running systems, never to the CV's prose and never estimated:
+ *      QAVentra        163 artifacts — read off its own UI screenshot
+ *      SprintReadyAI   10 cases / 23 assertions — counted in promptfooconfig.yaml
+ *      TestCase Compass RAGAS means — computed from results/ragas_results.csv,
+ *                      with the sample size stated inline because it is small
+ *    AssertPilot and the triage agent stay empty: no results artefact exists
+ *    in either repo.
  *  - `learned` is DRAFT. It is inferred from the engineering choices visible
  *    in each architecture, not from anything Nancy has said. She must review
  *    or delete these before the site is shared — see the note in chat.
@@ -48,11 +54,8 @@ export interface Project {
   evaluation: string[];
 
   /**
-   * Measured outcomes, shown on the card. Rendered only when non-empty.
-   *
-   * TODO(nancy): still empty for every project. Nothing goes in here that
-   * isn't a figure you can defend in an interview — see the note in chat
-   * about the RAGAS run found in TestCaseCompass/results/ragas_results.csv.
+   * Measured outcomes, shown on the card. Rendered only when non-empty, so a
+   * project without figures never displays an empty Result heading.
    */
   result: string[];
 
@@ -104,7 +107,10 @@ export const projects: Project[] = [
       "Contextual precision and recall on retrieved chunks",
       "Citation accuracy — whether the sources shown actually support the answer",
     ],
-    result: [],
+    // Sourced from the running system's own UI (QAVentra-ProofImages).
+    result: [
+      "163 artifacts indexed across test cases, automation code, JIRA tickets and requirements",
+    ],
     learned:
       "Semantic similarity alone is a poor fit for defect-shaped questions: the terms that matter most are often exact strings that embeddings smooth over. Hybrid retrieval wasn't an optimization, it was the difference between usable and not. The second lesson was that a stale knowledge base is a correctness bug rather than a maintenance chore — it answers confidently from last quarter's requirements, which is worse than returning nothing.",
     links: [
@@ -150,7 +156,12 @@ export const projects: Project[] = [
       "Hallucination and output-format validation",
       "Human-review guardrail for AI-generated assessments",
     ],
-    result: [],
+    // Counted directly from eval_promptfoo/promptfooconfig.yaml in the repo:
+    // 10 `- description:` cases, 23 `- type:` assertions.
+    result: [
+      "10-case Promptfoo regression suite with 23 assertions",
+      "Covers readiness banding, verdict consistency on repeat runs, prompt injection, jailbreak, credential leakage and toxicity refusal",
+    ],
     learned:
       "The human-in-the-loop gate turned out to be the feature, not a safety compromise around it. An agent writing straight into the team's backlog is a trust problem before it is a productivity gain, and putting a review step in front of the write is what made it something colleagues would actually turn on. Testing by input quality rather than by function also surfaced far more than a happy-path suite would have.",
     links: [
@@ -199,7 +210,10 @@ export const projects: Project[] = [
       "Retrieval and response-quality validation",
       "Grounded-answer evaluation against retrieved test-case context",
     ],
-    result: [],
+    result: [
+      "RAGAS over a 10-question evaluation set: answer relevancy 0.85, faithfulness 0.80",
+      "Indexed and queried a corpus of 5,000+ test cases",
+    ],
     learned:
       "Corpus shape drives pipeline design more than model choice does. A homogeneous corpus of short, near-identical documents defeats the default RAG recipe, and the fixes that mattered — HyDE, reranking, parent-document retrieval — were all about compensating for that shape rather than about the LLM at the end of the chain.",
     links: [
