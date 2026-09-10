@@ -28,6 +28,8 @@ export interface Project {
   /** One-sentence hook for the home-page card. */
   summary: string;
   status?: string;
+  /** e.g. "Client engagement" — marks work delivered for a client. */
+  context?: string;
   /** Filter group shown in the case studies section. */
   category: string;
   /** Shown on the card; the 4–5 most recognizable. */
@@ -70,6 +72,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "qaventra",
+    context: "Client engagement",
     category: "RAG systems",
     name: "QAVentra",
     subtitle: "Self-hosted hybrid RAG knowledge platform for QA teams",
@@ -125,6 +128,7 @@ export const projects: Project[] = [
   },
   {
     slug: "sprintreadyai",
+    context: "Client engagement",
     category: "AI agents",
     name: "SprintReadyAI",
     subtitle: "QA refinement copilot",
@@ -177,6 +181,7 @@ export const projects: Project[] = [
   },
   {
     slug: "testcase-compass",
+    context: "Client engagement",
     category: "RAG systems",
     name: "TestCase Compass",
     subtitle: "Advanced RAG pipeline over a test-case corpus",

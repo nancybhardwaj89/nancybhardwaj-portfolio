@@ -41,6 +41,7 @@ export const cards: ProjectCard[] = [
     subtitle: project.subtitle,
     category: project.category,
     status: project.status,
+    context: project.context,
     problemShort: project.problemShort,
     built: project.built,
     evaluation: project.evaluation,
