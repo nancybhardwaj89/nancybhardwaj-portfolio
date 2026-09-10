@@ -96,7 +96,9 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+          {/* lg, not md: seven items plus the wordmark and GitHub pill
+              overflow a tablet-width header. */}
+          <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -146,7 +148,7 @@ export function Header() {
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-surface text-fg-muted transition-colors hover:text-fg md:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-surface text-fg-muted transition-colors hover:text-fg lg:hidden"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -172,7 +174,7 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!menuOpen}
-        className="border-t border-border bg-bg md:hidden"
+        className="border-t border-border bg-bg lg:hidden"
       >
         <Container>
           <nav aria-label="Mobile" className="flex flex-col py-2">

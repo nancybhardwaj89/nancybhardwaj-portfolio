@@ -10,6 +10,7 @@ export function Projects() {
       id="projects"
       title="Case studies"
       lead="Four systems built to answer a question conventional test tooling doesn't: how do you know an AI system is behaving correctly?"
+      className="bg-surface-raised"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {projects.map((project, index) => (

@@ -12,7 +12,6 @@ export function Experience() {
       id="experience"
       title="Experience"
       lead="Fourteen years from manual testing to architecting automation and AI-quality practice."
-      className="bg-surface-raised"
     >
       <ol className="space-y-10">
         {roles.map((role, index) => (
@@ -37,10 +36,7 @@ export function Experience() {
                     {role.projects.map((project) => (
                       <li
                         key={project}
-                        // bg-surface, not bg-surface-raised: this section's
-                        // background is raised, so the badge needs to sit
-                        // against it rather than blend into it.
-                        className="rounded-md border border-border bg-surface px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
+                        className="rounded-md border border-border bg-surface-raised px-2 py-1 font-mono text-[11px] leading-none text-fg-muted"
                       >
                         {project}
                       </li>

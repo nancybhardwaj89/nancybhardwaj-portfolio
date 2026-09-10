@@ -15,7 +15,6 @@ export function Contact() {
       id="contact"
       title="Get in touch"
       lead="Open to conversations about AI quality engineering, test automation leadership, and agentic QA."
-      className="bg-surface-raised"
     >
       <Reveal>
         <div className="flex flex-col gap-8">
