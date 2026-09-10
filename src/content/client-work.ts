@@ -31,6 +31,35 @@ export interface ClientProject {
 
 export const clientWork: ClientProject[] = [
   {
+    name: "Salesforce Agentforce Quality Engineering",
+    subtitle: "Testing AI agents across enterprise workflows",
+    context: "Client engagement",
+    category: "Automation",
+    problemShort:
+      "Conversational AI introduces new testing challenges beyond traditional Salesforce testing, including intent, topics, actions, subagents, and AI-generated responses.",
+    built: [
+      "Agentforce testing approach",
+      "Intent and utterance validation",
+      "Topics and actions testing",
+      "Subagent validation",
+      "CRM workflow validation",
+      "AI response and behavior testing",
+    ],
+    evaluation: [],
+    result: [
+      "Brings structured quality engineering practices to Salesforce AI agents and business workflows",
+      // From the CV bullet on Topic/Action/Response pass-rate analysis.
+      "Misrouting identified before production rather than in live conversations",
+    ],
+    primaryStack: [
+      "Agentforce",
+      "Sales Cloud",
+      "Service Cloud",
+      "CRM",
+      "CPQ",
+    ],
+  },
+  {
     name: "Playwright Automation Framework",
     subtitle: "Scalable test automation architecture",
     context: "Client engagement",
@@ -94,34 +123,5 @@ export const clientWork: ClientProject[] = [
       "Improved pipeline visibility and reduced dependency on manual monitoring",
     ],
     primaryStack: ["Power Automate", "Azure DevOps", "Teams", "Email"],
-  },
-  {
-    name: "Salesforce Agentforce Quality Engineering",
-    subtitle: "Testing AI agents across enterprise workflows",
-    context: "Client engagement",
-    category: "Automation",
-    problemShort:
-      "Conversational AI introduces new testing challenges beyond traditional Salesforce testing, including intent, topics, actions, subagents, and AI-generated responses.",
-    built: [
-      "Agentforce testing approach",
-      "Intent and utterance validation",
-      "Topics and actions testing",
-      "Subagent validation",
-      "CRM workflow validation",
-      "AI response and behavior testing",
-    ],
-    evaluation: [],
-    result: [
-      "Brings structured quality engineering practices to Salesforce AI agents and business workflows",
-      // From the CV bullet on Topic/Action/Response pass-rate analysis.
-      "Misrouting identified before production rather than in live conversations",
-    ],
-    primaryStack: [
-      "Agentforce",
-      "Sales Cloud",
-      "Service Cloud",
-      "CRM",
-      "CPQ",
-    ],
   },
 ];

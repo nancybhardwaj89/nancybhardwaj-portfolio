@@ -23,19 +23,7 @@ export interface ProjectCard {
 }
 
 export const cards: ProjectCard[] = [
-  // Client engagements lead: fourteen years of enterprise delivery is the
-  // stronger signal, and it was previously buried in Experience bullets.
-  ...clientWork.map((project) => ({
-    name: project.name,
-    subtitle: project.subtitle,
-    category: project.category,
-    context: project.context,
-    problemShort: project.problemShort,
-    built: project.built,
-    evaluation: project.evaluation,
-    result: project.result,
-    primaryStack: project.primaryStack,
-  })),
+  // AI work leads the grid.
   ...projects.map((project) => ({
     name: project.name,
     subtitle: project.subtitle,
@@ -59,6 +47,19 @@ export const cards: ProjectCard[] = [
     result: repo.result,
     primaryStack: repo.primaryStack,
     href: repo.href,
+  })),
+  // Traditional automation last. Within it Agentforce comes first, since
+  // it is AI-agent testing rather than conventional automation.
+  ...clientWork.map((project) => ({
+    name: project.name,
+    subtitle: project.subtitle,
+    category: project.category,
+    context: project.context,
+    problemShort: project.problemShort,
+    built: project.built,
+    evaluation: project.evaluation,
+    result: project.result,
+    primaryStack: project.primaryStack,
   })),
 ];
 
